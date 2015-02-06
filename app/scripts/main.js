@@ -2,11 +2,27 @@ $(document).ready(function(){
    /* var w = $(window).width()+'x'+$(window).height();
     var d = $(document).width() + 'x' + $(document).height();
     alert('w:'+w+'\n'+'d:'+d);*/
-    /*$("#year-index").find("img").eq(0).load(function(){
+    var bgWid = '',
+        cHeight = $(window).height(),
+        wid = cHeight * 640 / 1136;
+
+    $("#year-index").find("img").width(wid);
+    //$("#year-index").find("img").height($(window).height());
+    $(".container").width(wid);
+    $(".container").height($(window).height());
+   
+   
+    bgWid =  wid/6.4;
+
+    $("body").css('background-size',bgWid);
+
+
+
+   /* $("#year-index").find("img").eq(0).load(function(){
         var bgWid = '',
             wid = $("#year-index").find("img").eq(0).width();
         $(".container").width(wid);
-        $(".container").height($("#year-index").find("img").eq(0).height());
+        $(".container").height($(window).height());
 
        
         bgWid =  wid/6.4;
@@ -24,19 +40,20 @@ $(document).ready(function(){
         $("#year-home .introduce p").css('margin', '0 0 0.5% 5%');
         
         $("#img-detail .label-year").css('margin', '2% 0');
+        $("#img-detail .text-infor").css('margin', '3% auto');
         //$("#img-detail table").css('margin-top', '17%');
         $("#img-detail table td").css('padding', '0.8% 0');
-        $("#img-detail b").css('top', '3%');
+        //$("#img-detail b").css('top', '3%');
     }
     
-    var bgWid = '',
+    /*var bgWid = '',
         wid = $("#year-index").find("img").eq(0).width();
         $(".container").width(wid);
         $(".container").height($("#year-index").find("img").eq(0).height());
         
         bgWid =  wid/6.4;
 
-        $("body").css('background-size',bgWid);
+        $("body").css('background-size',bgWid);*/
     /*$(".container").width($("#year-index").find("img").eq(0).width());
     $(".container").height($("#year-index").find("img").eq(0).height());*/
     var srcShow='',
@@ -65,8 +82,8 @@ $(document).ready(function(){
 	});
 
 	$("#year-home").find("li").click(function(){
-    	var imgHeight = '',
-            dis = '',
+    	var //imgHeight = '',
+            //dis = '',
             num = Math.floor(Math.random()*9),
     	    self = $(this),
     	    imgSrc = self.children().attr("src"),
@@ -88,9 +105,9 @@ $(document).ready(function(){
             $("#img-detail").find(".introduce textarea").attr("placeholder",inputValue);
 	    	$("#img-detail").find(".image-show").children("img").eq(num).show();
             
-            imgHeight = $("#img-detail").find(".image-show").children("img").eq(num).height(),
-            dis = $(".container").height() * 0.5 - imgHeight;
-            $("#img-detail").find(".image-show").children("img").eq(num).css("margin-top",dis/2);
+            //imgHeight = $("#img-detail").find(".image-show").children("img").eq(num).height(),
+            //dis = $(".container").height() * 0.5 - imgHeight;
+            //$("#img-detail").find(".image-show").children("img").eq(num).css("margin-top",dis/2);
 
 	    	self.children().attr("src",imgSrc);
 	    	self.removeClass("rotateZ");
@@ -135,13 +152,20 @@ $(document).ready(function(){
                 $("#img-detail").find(".icon").hide();
                 $("#img-share").find(".image-show img").attr("src",url+img+'/text/'+text1+'/fontsize/450/dissolve/80/gravity/SouthWest/dx/30/dy/55'+'/text/'+text2+'/fontsize/450/dissolve/80/gravity/SouthWest/dx/30/dy/20');
                 $("#img-share").show();
+
+                var SHARE_TEXT = '#猿忆童年# 那时候最幸福就是一边吃着娃娃头雪糕，玩着心爱的红白机或者386! 想要自己开发游戏，小光盘承载着少年的梦想与美好回忆，从过去到现在，我们一直在努力，为了理想做到更好！程序员，在这里找回你的童年！游戏传送门：http://niwei.qiniu.io', 
+                mainUrl =  $("#img-share").find(".image-show img").attr("src");
+
+                $("#img-share").find(".image-share a").eq(0).attr("href",genWeiboShareLink(SHARE_TEXT, mainUrl));
             }
             
         });  
  
         $("#img-detail").find(".label-year button").click(function(){
 
-            var self = $(this);
+            var self = $(this),
+                marginTop  = '',
+                right = '';
 
             $("#img-detail").find(".icon").hide();
 
@@ -154,15 +178,20 @@ $(document).ready(function(){
             $("#img-detail").find(".image-show").children("img").css("visibility","hidden");
             $("#img-detail").find(".detail-label").hide();
             $("#img-detail").find(".detail-label").eq(self.index()).show();
-
             
+            marginTop = $("#img-detail").find(".image-show").height() - $("#img-detail").find(".detail-label").eq(self.index()).children("table").height();
+            right =$("#img-detail").find(".image-show").width() - $("#img-detail").find(".detail-label").eq(self.index()).children("table").width();
+
+            $("#img-detail").find(".detail-label").eq(self.index()).children("table").css("margin-top",marginTop / 2);
             
             $("#img-detail").find("b").show();
+            $("#img-detail").find("b").css({"top":(marginTop - 30) / 2, "right": (right - 30) / 2});
 
             $("#img-detail").find(".detail-label").eq(self.index()).find("table td").click(function(){
                  
                 //$("#img-detail").find(".icon").show();
-                var dataFor = $(this).parents(".detail-label").data("for");
+                var dis = wid - $("#img-detail").find(".image-show").children("img").eq(num).width();
+                    dataFor = $(this).parents(".detail-label").data("for");
                 
                 $("#bg-color").hide();
                 imgData = 'http://7u2q8u.com1.z0.glb.clouddn.com/' + $(this).data("for") + '.png';
@@ -187,24 +216,62 @@ $(document).ready(function(){
                
                 if(dataFor == 'flavor'){
                    
-                    $("#"+dataFor).css("bottom",(dis + 70)/2);
+                    $("#"+dataFor).css("right",(dis + 20)/2);
 
                 }
                 else{
-                     $("#"+dataFor).css("top",dis/2);
+                     $("#"+dataFor).css("left",dis/2);
                 }
                 
             });
 
-            $(document).click(function(e){
-                if(e.target.className != 'btn' && e.target.className != 'btn flavor-btn'){
+            $("#img-detail .image-show").click(function(e){
+                $("#bg-color").hide();
+                $("#img-detail").find(".detail-label").hide();
+                $("#img-detail").find("b").hide();
+                $("#img-detail").find(".image-show").children("img").css("visibility","visible");
+                /*if(e.target.className != 'btn' && e.target.className != 'btn flavor-btn'){
                    //alert(123)
                     $("#bg-color").hide();
                     $("#img-detail").find(".detail-label").hide();
                     $("#img-detail").find("b").hide();
                     $("#img-detail").find(".image-show").children("img").css("visibility","visible");
                     
-                }
+                }*/
+
+                    
+            });
+
+             $("#bg-color").click(function(e){
+                $("#bg-color").hide();
+                $("#img-detail").find(".detail-label").hide();
+                $("#img-detail").find("b").hide();
+                $("#img-detail").find(".image-show").children("img").css("visibility","visible");
+                /*if(e.target.className != 'btn' && e.target.className != 'btn flavor-btn'){
+                   //alert(123)
+                    $("#bg-color").hide();
+                    $("#img-detail").find(".detail-label").hide();
+                    $("#img-detail").find("b").hide();
+                    $("#img-detail").find(".image-show").children("img").css("visibility","visible");
+                    
+                }*/
+
+                    
+            });
+
+             $("#bg-color").click(function(e){
+                $("#bg-color").hide();
+                $("#img-detail").find(".detail-label").hide();
+                $("#img-detail").find("b").hide();
+                $("#img-detail").find(".image-show").children("img").css("visibility","visible");
+                /*if(e.target.className != 'btn' && e.target.className != 'btn flavor-btn'){
+                   //alert(123)
+                    $("#bg-color").hide();
+                    $("#img-detail").find(".detail-label").hide();
+                    $("#img-detail").find("b").hide();
+                    $("#img-detail").find(".image-show").children("img").css("visibility","visible");
+                    
+                }*/
 
                     
             });
@@ -240,16 +307,30 @@ $(document).ready(function(){
 		$("#img-share").hide();
         $("#img-detail").find(".introduce .error").hide();
         $("#img-detail").find(".introduce textarea").val('');
+
+
 		
 		$("#year-home").show();
 
         $("#area").children("img").attr("src","");
         $("#flavor").children("img").attr("src","");
 	});
-   
+
+
+       
+        
+ 
     
 })
 
+
+
+var genWeiboShareLink = function(text, templUrl) {
+    var ShareText = encodeURIComponent(text);
+    var picUrl = encodeURIComponent(templUrl);
+    var url = encodeURIComponent('http://ninwei.qiniu.io');
+    return 'http://service.weibo.com/share/share.php?url=' + url + '&type=button&ralateUid=2651079901&language=zh_cn&appkey=3084908017&title=' + ShareText + '&pic=' + picUrl + '&searchPic=false&style=simple';
+};
 
 var utf8_encode = function(argString) {
     // http://kevin.vanzonneveld.net

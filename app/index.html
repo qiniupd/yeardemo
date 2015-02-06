@@ -72,7 +72,7 @@
             </div>            
         </div>
         <div id="img-detail" class="container">   
-        <div id="bg-color"></div>     
+            <div id="bg-color"></div>     
             <div class="table-auto">
                 
                 <div class="image-show">
@@ -220,14 +220,30 @@
                 <div class="image-show">
                     <img src="">
                 </div>
-                <div class="share-btn">
-                    <button class="btn">寄送贺卡</button>
+                <div class="image-share">
+                    <span>分享贺卡:</span>
+                    <a href=""><img src="http://7u2q8u.com1.z0.glb.clouddn.com/share_icon.png"></a>
+                    <a href=""><img src="http://7u2q8u.com1.z0.glb.clouddn.com/share_icon.png"></a>
+                </div>
+                <div class="share-btn">            
+
+                    <button type="button" class="btn" data-toggle="modal" data-target="#myModal">分享游戏</button>
                     <button class="btn">返回重来</button>
                 </div>
+                <p id="save-tip" class="save-tip">长按图片可以将图片保存到手机</p>
             </div>
              
         </div>
          
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+			    <div class="modal-content">
+			     点击右上角，分享游戏到朋友圈 
+
+			    </div>
+			</div>
+		</div>
         
         <!-- build:js(.) scripts/vendor.js -->
         <!-- bower:js -->
