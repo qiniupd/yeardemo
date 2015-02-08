@@ -10,13 +10,16 @@ $(document).ready(function(){
     //$("#year-index").find("img").height($(window).height());
     $(".container").width(wid);
     $(".container").height($(window).height());
-   
-   
+
+
     bgWid =  wid/6.4;
 
     $("body").css('background-size',bgWid);
 
-
+    var mySwiper = new Swiper('.swiper-container', {
+        pagination: '.pagination',
+        paginationClickable: true
+    })
 
    /* $("#year-index").find("img").eq(0).load(function(){
         var bgWid = '',
@@ -24,7 +27,7 @@ $(document).ready(function(){
         $(".container").width(wid);
         $(".container").height($(window).height());
 
-       
+
         bgWid =  wid/6.4;
 
         $("body").css('background-size',bgWid);
@@ -38,19 +41,19 @@ $(document).ready(function(){
 
         $("#year-home .introduce h4").css('margin', '0 0 1% 5%');
         $("#year-home .introduce p").css('margin', '0 0 0.5% 5%');
-        
+
         $("#img-detail .label-year").css('margin', '2% 0');
         $("#img-detail .text-infor").css('margin', '3% auto');
         //$("#img-detail table").css('margin-top', '17%');
         $("#img-detail table td").css('padding', '0.8% 0');
         //$("#img-detail b").css('top', '3%');
     }
-    
+
     /*var bgWid = '',
         wid = $("#year-index").find("img").eq(0).width();
         $(".container").width(wid);
         $(".container").height($("#year-index").find("img").eq(0).height());
-        
+
         bgWid =  wid/6.4;
 
         $("body").css('background-size',bgWid);*/
@@ -66,14 +69,14 @@ $(document).ready(function(){
         $(".container").width(wid);
         $(".container").height($("#year-index").find("img").eq(0).height());
 
-       
+
         bgWid =  wid/6.4;
 
         $("body").css('background-size',bgWid);*/
         $("#year-index").hide();
 		$("#year-home").show();
-		
-        
+
+
         /*var heightT = $(window).height(),
             tableHeight = $("body").height(),
             dis = heightT - tableHeight;
@@ -89,7 +92,7 @@ $(document).ready(function(){
     	    imgSrc = self.children().attr("src"),
     	    srcShow = $("#img-detail").find(".image-show").children("img").eq(num).attr("src"),
             inputValue = $("#img-detail").find(".introduce input").eq(num).val();;
-    	
+
     	self.addClass("rotateZ");
 
 
@@ -104,7 +107,7 @@ $(document).ready(function(){
 	    	$("#img-detail").find(".image-show").children("img").hide();
             $("#img-detail").find(".introduce textarea").attr("placeholder",inputValue);
 	    	$("#img-detail").find(".image-show").children("img").eq(num).show();
-            
+
             //imgHeight = $("#img-detail").find(".image-show").children("img").eq(num).height(),
             //dis = $(".container").height() * 0.5 - imgHeight;
             //$("#img-detail").find(".image-show").children("img").eq(num).css("margin-top",dis/2);
@@ -114,33 +117,33 @@ $(document).ready(function(){
 	    },2000);
 
     	$("#img-detail").find(".btn-sure button").click(function(){
-            
+
             var text1 = '',
                 text2 = '',
                 text = ' ',
                 img = '',
-                
+
                 url = srcShow+'?watermark/3',
                 val = $("#img-detail").find(".introduce textarea").val();
-                
+
                 if($("#area").children("img").attr("src")){
-                    
+
                    img = img +'/image/'+URLSafeBase64Encode($("#area").children("img").attr("src")+'?imageView2/1/w/120')+'/dissolve/100/gravity/NorthWest/dx/0/dy/0';
                 }
                 if($("#flavor").children("img").attr("src")){
                    img = img + '/image/'+URLSafeBase64Encode($("#flavor").children("img").attr("src")+'?imageView2/1/w/45/h/70')+'/dissolve/100/gravity/SouthEast/dx/10/dy/10';
                 }
-                
+
                 if(!val){
                     val = $("#img-detail").find(".introduce textarea").attr("placeholder");
-                } 
-      
+                }
+
                 text1 = URLSafeBase64Encode(val.substr(0,15));
-                 
+
                if(val.length > 15){
                     text =  val.substr(15,30);
                 }
-                text2 = URLSafeBase64Encode(text);   
+                text2 = URLSafeBase64Encode(text);
 
             if(val.length>30){
                 $("#img-detail").find(".introduce .error").show();
@@ -153,14 +156,14 @@ $(document).ready(function(){
                 $("#img-share").find(".image-show img").attr("src",url+img+'/text/'+text1+'/fontsize/450/dissolve/80/gravity/SouthWest/dx/30/dy/55'+'/text/'+text2+'/fontsize/450/dissolve/80/gravity/SouthWest/dx/30/dy/20');
                 $("#img-share").show();
 
-                var SHARE_TEXT = '#猿忆童年# 那时候最幸福就是一边吃着娃娃头雪糕，玩着心爱的红白机或者386! 想要自己开发游戏，小光盘承载着少年的梦想与美好回忆，从过去到现在，我们一直在努力，为了理想做到更好！程序员，在这里找回你的童年！游戏传送门：http://niwei.qiniu.io', 
+                var SHARE_TEXT = '#猿忆童年# 那时候最幸福就是一边吃着娃娃头雪糕，玩着心爱的红白机或者386! 想要自己开发游戏，小光盘承载着少年的梦想与美好回忆，从过去到现在，我们一直在努力，为了理想做到更好！程序员，在这里找回你的童年！游戏传送门：http://niwei.qiniu.io',
                 mainUrl =  $("#img-share").find(".image-show img").attr("src");
 
                 $("#img-share").find(".image-share a").eq(0).attr("href",genWeiboShareLink(SHARE_TEXT, mainUrl));
             }
-            
-        });  
- 
+
+        });
+
         $("#img-detail").find(".label-year button").click(function(){
 
             var self = $(this),
@@ -178,31 +181,31 @@ $(document).ready(function(){
             $("#img-detail").find(".image-show").children("img").css("visibility","hidden");
             $("#img-detail").find(".detail-label").hide();
             $("#img-detail").find(".detail-label").eq(self.index()).show();
-            
+
             marginTop = $("#img-detail").find(".image-show").height() - $("#img-detail").find(".detail-label").eq(self.index()).children("table").height();
             right =$("#img-detail").find(".image-show").width() - $("#img-detail").find(".detail-label").eq(self.index()).children("table").width();
 
             $("#img-detail").find(".detail-label").eq(self.index()).children("table").css("margin-top",marginTop / 2);
-            
+
             $("#img-detail").find("b").show();
             $("#img-detail").find("b").css({"top":(marginTop - 30) / 2, "right": (right - 30) / 2});
 
             $("#img-detail").find(".detail-label").eq(self.index()).find("table td").click(function(){
-                 
+
                 //$("#img-detail").find(".icon").show();
                 var dis = wid - $("#img-detail").find(".image-show").children("img").eq(num).width();
                     dataFor = $(this).parents(".detail-label").data("for");
-                
+
                 $("#bg-color").hide();
                 imgData = 'http://7u2q8u.com1.z0.glb.clouddn.com/' + $(this).data("for") + '.png';
 
                 $(this).parents(".detail-label").siblings(".detail-label").hide();
                 $(this).parents(".detail-label").hide();
                 $(this).parents(".detail-label").siblings("b").hide();
-                 
+
                 $("#img-detail").find(".image-show").children("img").css("visibility","visible");
                 /*$("#"+dataFor).css("background-position","-"+bgX+"px -"+bgY+"px");*/
-                
+
                 $("#"+dataFor).children('img').attr("src",imgData);
 
                 if( $("#"+dataFor).siblings(".icon").children("img").attr("src")){
@@ -211,18 +214,18 @@ $(document).ready(function(){
                 else{
                     $("#"+dataFor).show();
                 }
-                
 
-               
+
+
                 if(dataFor == 'flavor'){
-                   
+
                     $("#"+dataFor).css("right",(dis + 20)/2);
 
                 }
                 else{
                      $("#"+dataFor).css("left",dis/2);
                 }
-                
+
             });
 
             $("#img-detail .image-show").click(function(e){
@@ -236,10 +239,10 @@ $(document).ready(function(){
                     $("#img-detail").find(".detail-label").hide();
                     $("#img-detail").find("b").hide();
                     $("#img-detail").find(".image-show").children("img").css("visibility","visible");
-                    
+
                 }*/
 
-                    
+
             });
 
              $("#bg-color").click(function(e){
@@ -253,10 +256,10 @@ $(document).ready(function(){
                     $("#img-detail").find(".detail-label").hide();
                     $("#img-detail").find("b").hide();
                     $("#img-detail").find(".image-show").children("img").css("visibility","visible");
-                    
+
                 }*/
 
-                    
+
             });
 
              $("#bg-color").click(function(e){
@@ -270,10 +273,10 @@ $(document).ready(function(){
                     $("#img-detail").find(".detail-label").hide();
                     $("#img-detail").find("b").hide();
                     $("#img-detail").find(".image-show").children("img").css("visibility","visible");
-                    
+
                 }*/
 
-                    
+
             });
 
             $("#img-detail").find("b").click(function(){
@@ -285,31 +288,31 @@ $(document).ready(function(){
                         $("#img-detail .icon").eq(i).show();
                     }
                 }
-                
-               
-            }); 
-              
+
+
+            });
+
         });
-    	
+
     });
 
-       
 
 
 
-   
 
-	
+
+
+
 
 	$("#img-share").find(".share-btn button").eq(1).click(function(){
-        
+
         $("#img-share").find(".image-show img").attr("src","");
 		$("#img-share").hide();
         $("#img-detail").find(".introduce .error").hide();
         $("#img-detail").find(".introduce textarea").val('');
 
 
-		
+
 		$("#year-home").show();
 
         $("#area").children("img").attr("src","");
@@ -317,10 +320,10 @@ $(document).ready(function(){
 	});
 
 
-       
-        
- 
-    
+
+
+
+
 })
 
 
