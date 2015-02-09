@@ -77,8 +77,8 @@ body .container .table-auto button {
 #year-home .image-show {
   width: 100%;
   margin: 8% auto 10%;
+  height: 75%;
   /* height: 50%; */
-  min-height: 240px;
 }
 #year-home .image-show ul {
   width: 100%;
@@ -90,10 +90,10 @@ body .container .table-auto button {
 }
 #year-home .image-show ul li {
   width: 27%;
+  height: 30%;
   /* max-width: 105px; */
-  max-height: 100px;
-  min-height: 70px;
-  padding: 3% 0;
+  /* max-height: 100px;
+				min-height: 70px; */
   /* height: 31%; */
   /* height: 80px; */
   /* line-height: 80px; */
@@ -101,21 +101,38 @@ body .container .table-auto button {
   display: inline-block;
   text-align: center;
   margin: 3px;
+}
+#year-home .image-show ul li div {
+  height: 80%;
   background: #ae0b2a;
   position: relative;
 }
-#year-home .image-show ul li img {
+#year-home .image-show ul li div img {
   width: 50px;
   height: 60px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -30px;
+  margin-left: -25px;
+}
+#year-home .image-show ul li div .flavor-img {
+  display: none;
+  height: 100%;
+  top: 0;
+  left: 0;
+  margin-top: 0;
+  /* margin-left: 0; */
+  width: auto;
 }
 #year-home .image-show ul li p {
-  line-height: 20px;
-  position: absolute;
   width: 100%;
   color: #fff;
   z-index: 100;
   font-size: 18px;
-  bottom: 0;
+  height: 20%;
+  padding: 5% 0;
+  color: #000;
 }
 #year-home .introduce {
   font-size: 18px;
@@ -452,7 +469,6 @@ body .container .table-auto button {
     width: 100%;
     margin: 6% auto 8%;
     /* height: 50%; */
-    padding-top: 7%;
   }
   #year-home .image-show ul {
     width: 100%;
@@ -463,9 +479,9 @@ body .container .table-auto button {
     font-size: 0;
   }
   #year-home .image-show ul li {
-    height: 150px;
-    line-height: 150px;
-    max-height: 150px;
+    /* height: 150px;
+					line-height: 150px; 
+					max-height: 150px; */
     padding: 0;
   }
   #year-home .introduce h4 {
@@ -499,6 +515,6 @@ body .container .table-auto button {
   }
   #img-share .share-btn button {
     font-size: 1.2em;
-    margin: 0 8%;
+    margin: 0 3%;
   }
 }
