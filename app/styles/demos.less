@@ -118,9 +118,19 @@ body{
 				text-align: center;
 				margin: 3px;
 				background: #ae0b2a;
+				position: relative;
 				img{
 					width: 50px;
 					height: 60px;
+				}
+				p{
+					line-height: 20px;
+					position: absolute;
+					width: 100%;
+					color: #fff;
+					z-index: 100;
+					font-size: 18px;
+					bottom: 0;
 				}
 			}
 		}
@@ -346,7 +356,7 @@ body{
 #img-share{
     display: none; 
 	.image-show{
-		width: 100%;
+		width: 95%;
 		//height: 70%;
 		margin: 0 auto;
 		img{
@@ -355,23 +365,28 @@ body{
 		}
 	} 
 	.image-share{
-		margin: 7% auto;
+		margin: 6% auto 5%;
+		padding: 0 10%;
+       text-align: left;
+
 		span{
-			font-size: 1.2em;
+			font-size: 1.1em;
+            font-weight: 700;
 		}
 		img{
-			width: 40px;
+			width: 32px;
             margin-left: 20px;
 		}
 	} 
 	.share-btn{
 		font-size: 16px;
 		//margin: 15% auto 0;
+		padding: 0 5%;
 		text-align: center;
 		button{
 			color: #fff;
-            font-size: 1.1em;
-			padding: 2% 9%;
+            font-size: 1em;
+			padding: 1.5% 9%;
 			margin: 0 2.5% ;
         	font-weight: 700;
         	border-radius: 20px;
@@ -391,12 +406,13 @@ body{
 }
 
 .save-tip{
+	display: none;
 	position: fixed;
 	top: 0;
 	left: 0;
 	text-align: center;
 	width: 100%;
-	font-size: 1.6em;
+	font-size: 1.3em;
 	line-height: 2em;
 	color: white;
 	background-color: rgba(0, 0, 0, 0.5);
@@ -479,7 +495,7 @@ body{
 	box-shadow: none;
 	text-align: center;
 	color: #fff;
-	font-size: 1.6em;
+	font-size: 1.3em;
 	margin-top: 50%;
 }
 
