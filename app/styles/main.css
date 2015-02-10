@@ -343,6 +343,15 @@ body .container .table-auto button {
   width: 100%;
   margin: 0 auto;
 }
+#img-share .image-show p {
+  position: absolute;
+  left: 50%;
+  top: 35%;
+  font-size: 1.2em;
+  font-weight: 700;
+  margin: 0;
+  margin-left: -28px;
+}
 #img-share .image-show img {
   width: 100%;
 }
@@ -352,21 +361,21 @@ body .container .table-auto button {
   text-align: center;
 }
 #img-share .image-share span {
-  font-size: 1.25em;
+  font-size: 1.2em;
   font-weight: 700;
+  vertical-align: middle;
 }
 #img-share .image-share #retry {
   display: block;
   text-decoration: none;
   font-size: .9em;
   margin-top: 3.5%;
-  font-size: 0.8em;
   cursor: pointer;
   color: #01C6E0;
   font-weight: 700;
 }
 #img-share .image-share img {
-  width: 40px;
+  width: 32px;
   margin-left: 20px;
 }
 #img-share .share-btn {

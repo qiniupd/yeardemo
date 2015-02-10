@@ -172,6 +172,10 @@ $(document).ready(function(){
                 $("#img-detail").find(".icon").hide();
                 $("#img-share").find(".image-show img").attr("src",url+img+'/text/'+text1+'/font/'+URLSafeBase64Encode('楷体')+'/fontsize/300/dissolve/100/gravity/SouthWest/dx/50/dy/68'+'/text/'+text2+'/font/'+URLSafeBase64Encode('楷体')+'/fontsize/300/dissolve/100/gravity/SouthWest/dx/50/dy/47'+'/text/'+qurl+'/font/'+URLSafeBase64Encode('楷体')+'/fill/'+URLSafeBase64Encode('#cccccc')+'/fontsize/280/dissolve/100/gravity/SouthEast/dx/50/dy/13');
                 $("#img-share").show();
+                $("#img-share").find(".image-show p").css("height",$("#img-share").height());
+                $("#img-share").find(".image-show img").load(function(){
+                    $(this).siblings().hide();
+                });
 
                 var SHARE_TEXT = '＃我的年味日记＃除夕之夜，火车赶回家，爸妈在等我吃年夜饭，这就是我的年味儿，不论再晚，有人等你。2015.2.15-3.1七牛邀你玩转［我的年味日记］nianwei.qiniu.io，寻找年味儿。转发本微博便可抽取IPad以及全套年味日记春节贺卡（20套）。', 
                 mainUrl =  $("#img-share").find(".image-show img").attr("src");
