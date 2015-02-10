@@ -344,9 +344,8 @@ body .container .table-auto button {
   margin: 0 auto;
 }
 #img-share .image-show p {
-  position: absolute;
   left: 50%;
-  top: 35%;
+  padding-top: 35%;
   font-size: 1.2em;
   font-weight: 700;
   margin: 0;

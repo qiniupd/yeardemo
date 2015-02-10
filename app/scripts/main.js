@@ -1,13 +1,10 @@
 $(document).ready(function(){
-   /* var w = $(window).width()+'x'+$(window).height();
-    var d = $(document).width() + 'x' + $(document).height();
-    alert('w:'+w+'\n'+'d:'+d);*/
+   
     var bgWid = '',
         cHeight = $(window).height(),
         wid = cHeight * 640 / 1136;
 
     $("#year-index").find("img").width(wid);
-    //$("#year-index").find("img").height($(window).height());
     $(".container").width(wid);
     $(".container").height($(window).height());
    
@@ -21,48 +18,25 @@ $(document).ready(function(){
         paginationClickable: true
     })
 
-   /* $("#year-index").find("img").eq(0).load(function(){
-        var bgWid = '',
-            wid = $("#year-index").find("img").eq(0).width();
-        $(".container").width(wid);
-        $(".container").height($(window).height());
-
-       
-        bgWid =  wid/6.4;
-
-        $("body").css('background-size',bgWid);
-        alert(0)
-    });*/
 
     if($(window).height()<500){
         $("#year-home .image-show").css('margin', '3% auto 4%');
         $(".introduce").css('font-size', '14px');
-       // $("#retry").css('font-size', '14px');
 
         $("#year-home .introduce h4").css('margin', '0 0 1% 5%');
         $("#year-home .image-show p").css('font-size', '14px');
         
         $("#img-detail .label-year").css('margin', '2% 0');
         $("#img-detail .text-infor").css('margin', '3% auto');
-        //$("#img-detail table").css('margin-top', '17%');
+
         $("#img-detail table td").css('padding', '0.8% 0');
 
         $("#img-share .image-share").css('margin', '4% auto 3%');
-        //$("#img-share .share-btn").css('padding', '0');
+
         $("#img-share .image-share span").css('font-size', '1em');
-        //$("#img-detail b").css('top', '3%');
     }
     
-    /*var bgWid = '',
-        wid = $("#year-index").find("img").eq(0).width();
-        $(".container").width(wid);
-        $(".container").height($("#year-index").find("img").eq(0).height());
-        
-        bgWid =  wid/6.4;
-
-        $("body").css('background-size',bgWid);*/
-    /*$(".container").width($("#year-index").find("img").eq(0).width());
-    $(".container").height($("#year-index").find("img").eq(0).height());*/
+   
     var srcShow='',
         flag = true,
         imgData = '';
@@ -72,22 +46,19 @@ $(document).ready(function(){
 
         $("#year-index").hide();
 		$("#year-home").show();
+
 		marginT = $(".container").height() - $("#year-home").find(".image-show").height() - $("#year-home").find(".line-top").height()*2;
         $("#year-home").find(".image-show").css("margin-top",marginT / 2);
         
 	});
 
 	$("#year-home").find("li div").click(function(){
-    	var Height = ($(this).parents("ul").height() - 24) / 3 ,
+    	var Height = ($(this).parents("ul").height() - 24) / 3,
             marginLeft = '',
             Top = '',
             Width = '',
-            //dis = '',
-            //num = Math.floor(Math.random()*9),
     	    self = $(this),
-            //imgWidth = self.width();
-            //console.log(self.children("img").eq(1).width())
-    	    imgSrc = self.children("img").eq(0).attr("src"),
+    	    //imgSrc = self.children("img").eq(0).attr("src"),
     	    srcShow = self.children("img").eq(1).attr("src"),
             inputValue = self.children("input").val();
     	
@@ -116,10 +87,13 @@ $(document).ready(function(){
             
             $("#img-detail").find(".introduce textarea").attr("placeholder",inputValue);
 	    	$("#img-detail").find(".image-show .year-img").children("img").attr("src",srcShow);
-            Top = $("#img-detail").find(".image-show").height() - $("#img-detail").find(".image-show .year-img").children("img").height();
+            $("#img-detail").find(".image-show .year-img").children("img").load(function(){
+                Top = $("#img-detail").find(".image-show").height() - $("#img-detail").find(".image-show .year-img").children("img").height();
             Width = Top + $("#img-detail").find(".image-show .year-img").children("img").width();
             $("#img-detail").find(".image-show .year-img").children("img").css("margin-top",Top / 2);
             $("#img-detail").find(".image-show .year-img").css({"width":Width,"margin-left":- Width/2});
+            
+            })
             
             self.children("img").eq(0).show();
             self.children("img").eq(1).hide();
@@ -134,14 +108,11 @@ $(document).ready(function(){
                 text = ' ',
                 qurl = URLSafeBase64Encode('http://nianwei.qiniu.io'),
                 img = '/image/'+URLSafeBase64Encode(srcShow)+'/dissolve/100/gravity/NorthWest/dx/50/dy/55',
-                ///
-                bgurl = "http://7u2q8u.com1.z0.glb.clouddn.com/baidi03.png",
-                
+                bgurl = "http://7u2q8u.com1.z0.glb.clouddn.com/baidi03.png",                
                 url = bgurl+'?watermark/3',
                 val = $("#img-detail").find(".introduce textarea").val();
                
-                if($("#area").children("img").attr("src")){
-                    
+                if($("#area").children("img").attr("src")){                    
                    img = img +'/image/'+URLSafeBase64Encode($("#area").children("img").attr("src")+'?imageView2/1/w/120')+'/dissolve/100/gravity/NorthWest/dx/5/dy/5';
                 }
                 if($("#data").children("img").attr("src")){
@@ -170,12 +141,10 @@ $(document).ready(function(){
                 
                 $("#img-detail").hide();
                 $("#img-detail").find(".icon").hide();
-                $("#img-share").find(".image-show img").attr("src",url+img+'/text/'+text1+'/font/'+URLSafeBase64Encode('楷体')+'/fontsize/300/dissolve/100/gravity/SouthWest/dx/50/dy/68'+'/text/'+text2+'/font/'+URLSafeBase64Encode('楷体')+'/fontsize/300/dissolve/100/gravity/SouthWest/dx/50/dy/47'+'/text/'+qurl+'/font/'+URLSafeBase64Encode('楷体')+'/fill/'+URLSafeBase64Encode('#cccccc')+'/fontsize/280/dissolve/100/gravity/SouthEast/dx/50/dy/13');
-                $("#img-share").show();
-                $("#img-share").find(".image-show p").css("height",$("#img-share").height());
-                $("#img-share").find(".image-show img").load(function(){
-                    $(this).siblings().hide();
-                });
+                $("#img-share").find(".image-show img").hide().attr("src",url+img+'/text/'+text1+'/font/'+URLSafeBase64Encode('楷体')+'/fontsize/300/dissolve/100/gravity/SouthWest/dx/50/dy/68'+'/text/'+text2+'/font/'+URLSafeBase64Encode('楷体')+'/fontsize/300/dissolve/100/gravity/SouthWest/dx/50/dy/47'+'/text/'+qurl+'/font/'+URLSafeBase64Encode('楷体')+'/fill/'+URLSafeBase64Encode('#cccccc')+'/fontsize/280/dissolve/100/gravity/SouthEast/dx/50/dy/13');
+                 $("#img-share").show();
+                $("#img-share").find(".image-show p").css("height",$(".container").height() * 0.8);
+
 
                 var SHARE_TEXT = '＃我的年味日记＃除夕之夜，火车赶回家，爸妈在等我吃年夜饭，这就是我的年味儿，不论再晚，有人等你。2015.2.15-3.1七牛邀你玩转［我的年味日记］nianwei.qiniu.io，寻找年味儿。转发本微博便可抽取IPad以及全套年味日记春节贺卡（20套）。', 
                 mainUrl =  $("#img-share").find(".image-show img").attr("src");
@@ -303,15 +272,21 @@ $(document).ready(function(){
        
 
 
-
+    $("#img-share").find(".image-show img").load(function(){
+        $("#img-share").find(".image-show p").hide();
+        $("#img-share").find(".image-show img").show();
+    });
    
 
 	
 
 	$("#img-share").find("#retry").click(function(){
         
-        //$("#img-share").find(".image-show img").attr("src","");
+        $("#img-share").find(".image-show img").attr("src","");
+        $("#img-share").find(".image-show").children("p").show();
+        
 		$("#img-share").hide();
+        
         $("#img-detail").find(".introduce .error").hide();
         $("#img-detail").find(".introduce textarea").val('');
         $("#img-detail").find(".image-show .year-img").children("img").attr("src","");
@@ -320,9 +295,10 @@ $(document).ready(function(){
 		$("#year-home").show();
 
         $("#area").children("img").attr("src","");
+         $("#data").children("img").attr("src","");
         $("#flavor").children("img").attr("src","");
 
-        $("#img-share").find(".image-show img").attr("src","http://7u2q8u.com1.z0.glb.clouddn.com/baidi03.png")
+        // $("#img-share").find(".image-show img").attr("src","http://7u2q8u.com1.z0.glb.clouddn.com/baidi03.png")
 
 	});
 
