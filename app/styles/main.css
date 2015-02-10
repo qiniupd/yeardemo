@@ -129,7 +129,7 @@ body .container .table-auto button {
   width: 100%;
   color: #fff;
   z-index: 100;
-  font-size: 18px;
+  font-size: 16px;
   height: 20%;
   padding: 5% 0;
   color: #000;
@@ -181,11 +181,17 @@ body .container .table-auto button {
   position: relative;
   z-index: 21;
 }
-#img-detail .image-show img {
+#img-detail .image-show .year-img {
   height: 100%;
+  background: #fff;
+  position: absolute;
+  left: 50%;
   /* width: 50%;
 	        max-width: 280px; */
   /* margin: 3% auto; */
+}
+#img-detail .image-show .year-img img {
+  height: 80%;
 }
 #img-detail .image-show .icon {
   display: none;
@@ -198,14 +204,16 @@ body .container .table-auto button {
   height: 90px;
 }
 #img-detail .image-show .icon-bg {
+  left: 0;
   top: 0;
-}
-#img-detail .image-show .flavor-bg {
-  bottom: 10px;
 }
 #img-detail .image-show .flavor-bg img {
   width: 35px;
   height: 60px;
+}
+#img-detail .image-show .data-bg img {
+  width: 57px;
+  height: 15px;
 }
 #img-detail .image-show .detail-label {
   display: none;
@@ -270,7 +278,6 @@ body .container .table-auto button {
 }
 #img-detail .introduce .text-infor {
   width: 100%;
-  padding: 0 10%;
   margin: 5% auto;
   /* padding-top: 5%; */
   text-align: center;
@@ -278,7 +285,7 @@ body .container .table-auto button {
 #img-detail .introduce .text-infor .label-year {
   width: 100%;
   margin: 4% 0;
-  text-align: left;
+  text-align: center;
   position: relative;
 }
 #img-detail .introduce .text-infor h4 {
@@ -322,37 +329,44 @@ body .container .table-auto button {
 #img-detail .introduce button {
   color: #fff;
   font-size: 1em;
-  padding: 1.5% 12%;
-  float: left;
+  padding: 1.5% 8%;
+  margin: 0 2%;
   font-weight: 700;
   border-radius: 20px;
   outline: none;
   position: relative;
 }
-#img-detail .introduce .flavor-btn {
-  float: right;
-}
 #img-share {
   display: none;
 }
 #img-share .image-show {
-  width: 95%;
+  width: 100%;
   margin: 0 auto;
 }
 #img-share .image-show img {
   width: 100%;
 }
 #img-share .image-share {
-  margin: 6% auto 5%;
+  margin-top: 6%;
   padding: 0 10%;
-  text-align: left;
+  text-align: center;
 }
 #img-share .image-share span {
-  font-size: 1.1em;
+  font-size: 1.25em;
+  font-weight: 700;
+}
+#img-share .image-share #retry {
+  display: block;
+  text-decoration: none;
+  font-size: .9em;
+  margin-top: 3.5%;
+  font-size: 0.8em;
+  cursor: pointer;
+  color: #01C6E0;
   font-weight: 700;
 }
 #img-share .image-share img {
-  width: 32px;
+  width: 40px;
   margin-left: 20px;
 }
 #img-share .share-btn {
@@ -435,7 +449,8 @@ body .container .table-auto button {
 .swiper-container .pagination {
   position: absolute;
   z-index: 20;
-  left: 47%;
+  left: 50%;
+  margin-left: -30px;
   bottom: 10px;
 }
 .swiper-container .swiper-pagination-switch {
@@ -459,7 +474,8 @@ body .container .table-auto button {
   text-align: center;
   color: #fff;
   font-size: 1.3em;
-  margin-top: 50%;
+  margin-top: 45%;
+  line-height: 30px;
 }
 @media screen and (min-width: 768px) {
   body {
@@ -506,9 +522,6 @@ body .container .table-auto button {
   }
   #img-detail .introduce .text-infor .label-year {
     margin: 3% auto;
-  }
-  #img-detail .introduce button {
-    font-size: 1.1em;
   }
   #img-detail .image-show b {
     right: 5%;

@@ -2,7 +2,7 @@
 <html class="no-js">
     <head>
         <meta charset="utf-8">
-        <title>yearflavordemo</title>
+        <title>我的年味日记—七牛云存储</title>
         <!-- <meta  name="viewport" content="width=device-width, initial-scale=1"> -->
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <link rel="shortcut icon" href="/favicon.ico">
@@ -206,7 +206,29 @@
 	                    </table>
 	                    
 	                </div>
-	               
+	               <div class="detail-label" data-for="data">
+	                    <table>
+	                        <tbody>
+	                            <tr>
+	                                <td data-for="sanshi">大年三十</td>
+	                                <td data-for="chuyi">大年初一</td>
+	                            </tr>
+	                            <tr>
+	                                <td data-for="chuer">大年初二</td>
+	                                <td data-for="chusan">大年初三</td>
+	                            </tr>
+	                            <tr>
+	                                <td data-for="chusi">大年初四</td>
+	                                <td data-for="chuwu">大年初五</td>
+	                            </tr>
+	                            <tr>
+	                                <td data-for="chuliu">大年初六</td>
+	                                <td data-for="shiwu">正月十五</td>
+	                            </tr>
+	                        </tbody>
+	                    </table>     
+	                                           
+	                </div>
 	                <div class="detail-label" data-for="flavor">
 	                    <table>
 	                        <tbody>
@@ -236,13 +258,17 @@
 	                    </table>     
 	                                           
 	                </div>
-	               
-	                
+
 	                <b>X</b>
-                    <div id="area" class="icon-bg icon"><img src=""></div>
-                    <img src="">
                     
-					<div id="flavor" class="flavor-bg icon"><img src=""></div>
+                    <div class="year-img">
+	                    <div id="area" class="icon-bg icon"><img src=""></div>
+	                    <div id="data" class="data-bg icon"><img src=""></div>
+	                    <img src="">
+	                    <div id="flavor" class="flavor-bg icon"><img src=""></div>
+                    </div>
+                    
+					
                 </div>
                 
                 <div class="line-top">
@@ -253,8 +279,8 @@
                         <h4>年味标签：</h4>
                         <div class="label-year clearfix">
                             <button class="btn">地域</button>
-                            <!-- <button class="btn">日期</button> -->
-                            <button class="btn flavor-btn">年味</button>  
+                            <button class="btn">日期</button>
+                            <button class="btn">年味</button>  
                            
                         </div>
                                                    
@@ -263,15 +289,6 @@
                         <h4>说说你理解的年味：</h4>
                         <textarea placeholder=""></textarea>
                         <p class="error">字数不能超过30</p>
-                        <!-- <input type="hidden" value="我理解的年味，就是回家、团圆，和最爱的亲人在一起～">
-                        <input type="hidden" value="这三个场景需要考虑不同的安全因素，因此～">
-                        <input type="hidden" value="权限，指定上传的目标空间或允许覆盖的指定资源～">
-                        <input type="hidden" value="在使用七牛云存储服务的过程中，需要考虑～">
-                        <input type="hidden" value="权限，指定上传的目标空间或允许覆盖的指定资源～">
-                        <input type="hidden" value="我理解的年味，就是回家、团圆，和最爱的亲人在一起～">
-                        <input type="hidden" value="我理解的年味，就是回家、团圆，和最爱的亲人在一起～">
-                        <input type="hidden" value="我理解的年味，就是回家、团圆，和最爱的亲人在一起～">
-                        <input type="hidden" value="我理解的年味，就是回家、团圆，和最爱的亲人在一起～"> -->
                     </div>
                     <div class="btn-sure">
                         <button class="btn">生成“年味”贺卡 </button>
@@ -287,17 +304,15 @@
                     <img src="http://7u2q8u.com1.z0.glb.clouddn.com/baidi03.png">
                 </div>
                 <div class="image-share">
-                    <span>分享贺卡:</span>
-                    <a href="javascript:void(0)"><img src="http://7u2q8u.com1.z0.glb.clouddn.com/wechat.png"></a>
-                    <a href=""><img src="http://7u2q8u.com1.z0.glb.clouddn.com/weibo.png"></a>
-                   
-                </div>
-                <div class="share-btn">            
+                    <span>分享赢大奖:</span>
+                    <a data-toggle="modal" data-target="#myModal" href="javascript:void(0)"><img src="http://7u2q8u.com1.z0.glb.clouddn.com/weixin64x64.png"></a>
+                    <a href=""><img src="http://7u2q8u.com1.z0.glb.clouddn.com/weibo64x64.png"></a>
+                	
+                    <a id="retry">再来一次</a>
 
-                    <button type="button" class="btn" data-toggle="modal" data-target="#myModal">分享游戏</button>
-                    <button class="btn">返回重来</button>
                 </div>
-                <p id="save-tip" class="save-tip">长按图片可以将图片保存到手机</p>
+    
+                
             </div>
              
         </div>
@@ -306,7 +321,8 @@
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 			    <div class="modal-content">
-			     点击右上角，分享游戏到朋友圈 
+			    长按图片可以将图片保存到手机<br/>
+			    点击右上角，分享游戏到朋友圈 
 
 			    </div>
 			</div>

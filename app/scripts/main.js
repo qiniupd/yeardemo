@@ -37,10 +37,10 @@ $(document).ready(function(){
     if($(window).height()<500){
         $("#year-home .image-show").css('margin', '3% auto 4%');
         $(".introduce").css('font-size', '14px');
-        $(".share-btn").css('font-size', '14px');
+       // $("#retry").css('font-size', '14px');
 
         $("#year-home .introduce h4").css('margin', '0 0 1% 5%');
-        $("#year-home .introduce p").css('margin', '0 0 0.5% 5%');
+        $("#year-home .image-show p").css('font-size', '14px');
         
         $("#img-detail .label-year").css('margin', '2% 0');
         $("#img-detail .text-infor").css('margin', '3% auto');
@@ -48,7 +48,7 @@ $(document).ready(function(){
         $("#img-detail table td").css('padding', '0.8% 0');
 
         $("#img-share .image-share").css('margin', '4% auto 3%');
-        $("#img-share .share-btn").css('padding', '0');
+        //$("#img-share .share-btn").css('padding', '0');
         $("#img-share .image-share span").css('font-size', '1em');
         //$("#img-detail b").css('top', '3%');
     }
@@ -79,8 +79,9 @@ $(document).ready(function(){
 
 	$("#year-home").find("li div").click(function(){
     	var Height = ($(this).parents("ul").height() - 24) / 3 ,
-            marginTop = '',
-            
+            marginLeft = '',
+            Top = '',
+            Width = '',
             //dis = '',
             //num = Math.floor(Math.random()*9),
     	    self = $(this),
@@ -95,8 +96,8 @@ $(document).ready(function(){
             self.addClass("rotateZ");
             setTimeout(function(){
                 self.children("img").eq(0).hide();
-                marginTop = self.width() - self.children("img").eq(1).width();
-                self.children("img").eq(1).css("margin-left",marginTop / 2);
+                marginLeft = self.width() - self.children("img").eq(1).width();
+                self.children("img").eq(1).css("margin-left",marginLeft / 2);
                 self.children("img").eq(1).show();
                 
                 //self.css('padding', '0');
@@ -111,12 +112,17 @@ $(document).ready(function(){
 
 			self.parents("#year-home").hide();
  			$("#img-detail").show();
-	    	//$("#img-detail").find(".image-show").children("img").hide();
+	    	
+            
             $("#img-detail").find(".introduce textarea").attr("placeholder",inputValue);
-	    	$("#img-detail").find(".image-show").children("img").attr("src",srcShow);
+	    	$("#img-detail").find(".image-show .year-img").children("img").attr("src",srcShow);
+            Top = $("#img-detail").find(".image-show").height() - $("#img-detail").find(".image-show .year-img").children("img").height();
+            Width = Top + $("#img-detail").find(".image-show .year-img").children("img").width();
+            $("#img-detail").find(".image-show .year-img").children("img").css("margin-top",Top / 2);
+            $("#img-detail").find(".image-show .year-img").css({"width":Width,"margin-left":- Width/2});
             
             self.children("img").eq(0).show();
-            self.children("img").eq(1).hide()
+            self.children("img").eq(1).hide();
 	    	self.removeClass("rotateZ");
             flag = true;
 	    },2000);
@@ -138,6 +144,9 @@ $(document).ready(function(){
                     
                    img = img +'/image/'+URLSafeBase64Encode($("#area").children("img").attr("src")+'?imageView2/1/w/120')+'/dissolve/100/gravity/NorthWest/dx/5/dy/5';
                 }
+                if($("#data").children("img").attr("src")){
+                   img = img + '/image/'+URLSafeBase64Encode($("#data").children("img").attr("src"))+'/dissolve/100/gravity/SouthWest/dx/50/dy/105';
+                }
                 if($("#flavor").children("img").attr("src")){
                    img = img + '/image/'+URLSafeBase64Encode($("#flavor").children("img").attr("src")+'?imageView2/1/w/45/h/70')+'/dissolve/100/gravity/SouthEast/dx/30/dy/120';
                 }
@@ -146,10 +155,10 @@ $(document).ready(function(){
                     val = $("#img-detail").find(".introduce textarea").attr("placeholder");
                 } 
       
-                text1 = URLSafeBase64Encode(val.substr(0,15));
+                text1 = URLSafeBase64Encode(val.substr(0,21));
                  
-               if(val.length > 15){
-                    text =  val.substr(15,30);
+               if(val.length > 21){
+                    text =  val.substr(21,30);
                 }
                 text2 = URLSafeBase64Encode(text);   
 
@@ -161,7 +170,7 @@ $(document).ready(function(){
                 
                 $("#img-detail").hide();
                 $("#img-detail").find(".icon").hide();
-                $("#img-share").find(".image-show img").attr("src",url+img+'/text/'+text1+'/fontsize/400/dissolve/80/gravity/SouthWest/dx/50/dy/67'+'/text/'+text2+'/fontsize/400/dissolve/80/gravity/SouthWest/dx/50/dy/35'+'/text/'+qurl+'/fontsize/300/dissolve/80/gravity/SouthEast/dx/55/dy/10');
+                $("#img-share").find(".image-show img").attr("src",url+img+'/text/'+text1+'/font/'+URLSafeBase64Encode('楷体')+'/fontsize/300/dissolve/100/gravity/SouthWest/dx/50/dy/68'+'/text/'+text2+'/font/'+URLSafeBase64Encode('楷体')+'/fontsize/300/dissolve/100/gravity/SouthWest/dx/50/dy/47'+'/text/'+qurl+'/font/'+URLSafeBase64Encode('楷体')+'/fill/'+URLSafeBase64Encode('#cccccc')+'/fontsize/280/dissolve/100/gravity/SouthEast/dx/50/dy/13');
                 $("#img-share").show();
 
                 var SHARE_TEXT = '＃我的年味日记＃除夕之夜，火车赶回家，爸妈在等我吃年夜饭，这就是我的年味儿，不论再晚，有人等你。2015.2.15-3.1七牛邀你玩转［我的年味日记］nianwei.qiniu.io，寻找年味儿。转发本微博便可抽取IPad以及全套年味日记春节贺卡（20套）。', 
@@ -186,7 +195,7 @@ $(document).ready(function(){
             self.siblings().css("z-index","19");
             self.css("z-index","21");
 
-            $("#img-detail").find(".image-show").children("img").css("visibility","hidden");
+            $("#img-detail").find(".image-show .year-img").css("visibility","hidden");
             $("#img-detail").find(".detail-label").hide();
             $("#img-detail").find(".detail-label").eq(self.index()).show();
             
@@ -201,40 +210,41 @@ $(document).ready(function(){
             $("#img-detail").find(".detail-label").eq(self.index()).find("table td").click(function(){
                  
                 //$("#img-detail").find(".icon").show();
-                var dis = wid - $("#img-detail").find(".image-show").children("img").width();
-                    dataFor = $(this).parents(".detail-label").data("for");
+                var dataFor = $(this).parents(".detail-label").data("for");
                 
                 $("#bg-color").hide();
                 imgData = 'http://7u2q8u.com1.z0.glb.clouddn.com/' + $(this).data("for") + '.png';
 
-                $(this).parents(".detail-label").siblings(".detail-label").hide();
-                $(this).parents(".detail-label").hide();
+               
+                $(this).parents(".image-show").children(".detail-label").hide();
                 $(this).parents(".detail-label").siblings("b").hide();
                  
-                $("#img-detail").find(".image-show").children("img").css("visibility","visible");
-                /*$("#"+dataFor).css("background-position","-"+bgX+"px -"+bgY+"px");*/
+                $("#img-detail").find(".image-show .year-img").css("visibility","visible");
+    
                 
                 $("#"+dataFor).children('img').attr("src",imgData);
 
-                if($("#"+dataFor).siblings(".icon").children("img").attr("src")){
-                    $("#img-detail").find(".icon").show();
+                $("#"+dataFor).show();
+                if(dataFor == 'data'){
+                    $("#img-detail .data-bg").css({"left":Top / 2,"bottom":Top / 8});
                 }
-                else{
-                    $("#"+dataFor).show();
-                    $("#"+dataFor).click(function(){
-                        $("#"+dataFor).hide();
-                    })
+                if(dataFor == 'flavor'){
+                    $("#img-detail .flavor-bg").css({"right":Top / 4,"bottom":Top / 4});
+                }
+
+                for(var i = 0; i<3; i++){
+                    if( $("#img-detail .icon").eq(i).children("img").attr("src")){
+                        $("#img-detail .icon").eq(i).show();
+                        $("#img-detail .icon").eq(i).click(function(){
+                            $(this).children().attr("src","");
+                            $(this).hide();
+                            //console.log($(this))
+                        })
+                    }
                 }
                 
                
-                if(dataFor == 'flavor'){
-                   
-                    $("#"+dataFor).css("right",(dis + 20)/2);
-
-                }
-                else{
-                     $("#"+dataFor).css("left",dis/2);
-                }
+                
                 
             });
 
@@ -242,23 +252,14 @@ $(document).ready(function(){
                 $("#bg-color").hide();
                 $("#img-detail").find(".detail-label").hide();
                 $("#img-detail").find("b").hide();
-                $("#img-detail").find(".image-show").children("img").css("visibility","visible");
+                $("#img-detail").find(".image-show .year-img").css("visibility","visible");
 
-                for(var i = 0; i<2; i++){
+                for(var i = 0; i<3; i++){
                     if( $("#img-detail .icon").eq(i).children("img").attr("src")){
                         $("#img-detail .icon").eq(i).show();
                     }
                 }
-                /*if(e.target.className != 'btn' && e.target.className != 'btn flavor-btn'){
-                   //alert(123)
-                    $("#bg-color").hide();
-                    $("#img-detail").find(".detail-label").hide();
-                    $("#img-detail").find("b").hide();
-                    $("#img-detail").find(".image-show").children("img").css("visibility","visible");
-                    
-                }*/
-
-                    
+                
             });
 
             
@@ -266,22 +267,13 @@ $(document).ready(function(){
                 $("#bg-color").hide();
                 $("#img-detail").find(".detail-label").hide();
                 $("#img-detail").find("b").hide();
-                $("#img-detail").find(".image-show").children("img").css("visibility","visible");
+                $("#img-detail").find(".image-show .year-img").css("visibility","visible");
 
-                for(var i = 0; i<2; i++){
+                for(var i = 0; i<3; i++){
                     if( $("#img-detail .icon").eq(i).children("img").attr("src")){
                         $("#img-detail .icon").eq(i).show();
                     }
                 }
-                /*if(e.target.className != 'btn' && e.target.className != 'btn flavor-btn'){
-                   //alert(123)
-                    $("#bg-color").hide();
-                    $("#img-detail").find(".detail-label").hide();
-                    $("#img-detail").find("b").hide();
-                    $("#img-detail").find(".image-show").children("img").css("visibility","visible");
-                    
-                }*/
-
                     
             });
 
@@ -297,6 +289,8 @@ $(document).ready(function(){
                 
                
             }); 
+
+
               
         });
     	
@@ -310,13 +304,13 @@ $(document).ready(function(){
 
 	
 
-	$("#img-share").find(".share-btn button").eq(1).click(function(){
+	$("#img-share").find("#retry").click(function(){
         
         //$("#img-share").find(".image-show img").attr("src","");
 		$("#img-share").hide();
         $("#img-detail").find(".introduce .error").hide();
         $("#img-detail").find(".introduce textarea").val('');
-        $("#img-detail").find(".image-show").children("img").attr("src","");
+        $("#img-detail").find(".image-show .year-img").children("img").attr("src","");
 
 		
 		$("#year-home").show();
@@ -328,12 +322,6 @@ $(document).ready(function(){
 
 	});
 
-    $("#img-share").find(".image-share a").eq(0).click(function(){
-        
-        $("#img-share").find(".save-tip").show();
-
-    });
-       
         
  
     

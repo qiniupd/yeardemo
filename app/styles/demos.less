@@ -146,7 +146,7 @@ body{
 					width: 100%;
 					color: #fff;
 					z-index: 100;
-					font-size: 18px;
+					font-size: 16px;
 					height: 20%;
 					padding: 5% 0;
 					color: #000;
@@ -204,8 +204,15 @@ body{
 		margin: 0 auto;
 		position: relative;
 		z-index: 21;
-		img{
+		.year-img{
 			height: 100%;
+			background: #fff;
+			position: absolute;
+			left: 50%;
+
+			img{
+				height: 80%;
+			}
 	        /* width: 50%;
 	        max-width: 280px; */
 			/* margin: 3% auto; */
@@ -223,17 +230,21 @@ body{
 		}
 
 		.icon-bg{
-			//left: 25%;
+			left: 0;
 			top: 0;
 		}
 		
 		.flavor-bg{
-			
-			bottom: 10px;
-			//right: 26%;
             img{
             	width: 35px;
             	height: 60px;
+            }
+		}
+
+		.data-bg{
+            img{
+            	width: 57px;
+				height: 15px;
             }
 		}
 
@@ -307,14 +318,14 @@ body{
 		width: 100%;
 		.text-infor{
 			width: 100%;
-			padding: 0 10%;
+			
 			margin: 5% auto;
 			/* padding-top: 5%; */
 			text-align: center;
 			.label-year{
                 width: 100%;
                 margin: 4% 0;
-                text-align: left;
+                text-align: center;
                 position: relative;                           				
 			}
 			h4{
@@ -359,24 +370,21 @@ body{
 		button{
         	color: #fff;
             font-size: 1em;
-            padding: 1.5% 12%;
-        	float: left;
+            padding: 1.5% 8%;
+        	margin: 0 2%;
         	font-weight: 700;
         	border-radius: 20px;
         	outline: none;
         	position: relative;
         }  
-        .flavor-btn{
-        	//margin-right: 13%;
-        	float: right;
-        } 
+        
 	}
 }
 
 #img-share{
     display: none; 
 	.image-show{
-		width: 95%;
+		width: 100%;
 		//height: 70%;
 		margin: 0 auto;
 		img{
@@ -385,16 +393,27 @@ body{
 		}
 	} 
 	.image-share{
-		margin: 6% auto 5%;
+		margin-top: 6%;
 		padding: 0 10%;
-       text-align: left;
+        text-align: center;
 
 		span{
-			font-size: 1.1em;
+			//text-align: center;
+			font-size: 1.25em;
             font-weight: 700;
 		}
+		#retry{
+			display: block;
+			text-decoration: none;
+			font-size: .9em;
+			margin-top: 3.5%;
+			font-size: 0.8em;
+			cursor: pointer;
+			color: #01C6E0;
+			font-weight: 700;
+			}
 		img{
-			width: 32px;
+			width: 40px;
             margin-left: 20px;
 		}
 	} 
@@ -490,7 +509,8 @@ body{
     .pagination {
         position: absolute;
         z-index: 20;
-        left: 47%;
+        left: 50%;
+		margin-left: -30px;
         bottom: 10px;
     }
     .swiper-pagination-switch {
@@ -516,7 +536,8 @@ body{
 	text-align: center;
 	color: #fff;
 	font-size: 1.3em;
-	margin-top: 50%;
+	margin-top: 45%;
+	line-height: 30px;
 }
 
 
@@ -581,9 +602,7 @@ body{
 			    }
 			    
 			}
-			button {
-				font-size: 1.1em;
-			}
+			
    		} 
 
    		.image-show {
@@ -594,6 +613,7 @@ body{
    	} 
 
    	#img-share {
+
    		.share-btn {
 	   		button {
 				
