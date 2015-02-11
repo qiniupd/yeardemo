@@ -1,22 +1,24 @@
+var Q = window.Q || {};
+Q.wHeight = $(window).height();
+Q.wWidth = Q.wHeight * 640 / 1136;
+
+
 $(document).ready(function(){
    
-    var bgWid = '',
-        cHeight = $(window).height(),
-        wid = cHeight * 640 / 1136;
-
-    $("#year-index").find("img").width(wid);
-    $(".container").width(wid);
-    $(".container").height($(window).height());
-   
-   
-    bgWid =  wid/6.4;
-
+    var bgWid = bgWid =  Q.wWidth/6.4,
+        srcShow = $("#year-home").find("li div").children("img").eq(1).attr("src"),
+        flag = true,
+        imgData = '';
+       
+    $("#year-index").find("img").width(Q.wWidth);
+    $(".container").width(Q.wWidth);
+    $(".container").height($(window).height());    
     $("body").css('background-size',bgWid);
 
     var mySwiper = new Swiper('.swiper-container', {
         pagination: '.pagination',
         paginationClickable: true
-    })
+    });
 
 
     if($(window).height()<500){
@@ -27,19 +29,17 @@ $(document).ready(function(){
         $("#year-home .image-show p").css('font-size', '14px');
         
         $("#img-detail .label-year").css('margin', '2% 0');
+        $("#img-detail .label-year button").css('margin', '0 1%');
         $("#img-detail .text-infor").css('margin', '3% auto');
 
         $("#img-detail table td").css('padding', '0.8% 0');
 
-        $("#img-share .image-share").css('margin', '4% auto 3%');
+        $("#img-share .image-share").css('margin-top', '3%');
+        $("#img-share .image-share").find("img").css('width', '25px');
 
         $("#img-share .image-share span").css('font-size', '1em');
     }
-    
-   
-    var srcShow='',
-        flag = true,
-        imgData = '';
+        
 
 	$("#year-index").find(".show-index").eq(2).children("img").click(function(){
         var marginT = '';
@@ -47,19 +47,15 @@ $(document).ready(function(){
         $("#year-index").hide();
 		$("#year-home").show();
 
-		marginT = $(".container").height() - $("#year-home").find(".image-show").height() - $("#year-home").find(".line-top").height()*2;
+		marginT = $(".container").height() - $("#year-home").find(".image-show").height() - $("#year-home").find(".line-top").height() * 2;
         $("#year-home").find(".image-show").css("margin-top",marginT / 2);
         
 	});
 
+
 	$("#year-home").find("li div").click(function(){
-    	var Height = ($(this).parents("ul").height() - 24) / 3,
-            marginLeft = '',
-            Top = '',
-            Width = '',
+    	var marginLeft = '',
     	    self = $(this),
-    	    //imgSrc = self.children("img").eq(0).attr("src"),
-    	    srcShow = self.children("img").eq(1).attr("src"),
             inputValue = self.children("input").val();
     	
         if(flag){
@@ -67,18 +63,13 @@ $(document).ready(function(){
             self.addClass("rotateZ");
             setTimeout(function(){
                 self.children("img").eq(0).hide();
-                marginLeft = self.width() - self.children("img").eq(1).width();
-                self.children("img").eq(1).css("margin-left",marginLeft / 2);
                 self.children("img").eq(1).show();
-                
-                //self.css('padding', '0');
-                //self.children().css('height',Height);
+                marginLeft = self.width() - self.children("img").eq(1).width();
+                self.children("img").eq(1).css("margin-left",marginLeft / 2);                
+              
             },1000);
+
         }
-    	
-
-        
-
 	    setTimeout(function(){
 
 			self.parents("#year-home").hide();
@@ -87,199 +78,174 @@ $(document).ready(function(){
             
             $("#img-detail").find(".introduce textarea").attr("placeholder",inputValue);
 	    	$("#img-detail").find(".image-show .year-img").children("img").attr("src",srcShow);
-            $("#img-detail").find(".image-show .year-img").children("img").load(function(){
-                Top = $("#img-detail").find(".image-show").height() - $("#img-detail").find(".image-show .year-img").children("img").height();
-            Width = Top + $("#img-detail").find(".image-show .year-img").children("img").width();
-            $("#img-detail").find(".image-show .year-img").children("img").css("margin-top",Top / 2);
-            $("#img-detail").find(".image-show .year-img").css({"width":Width,"margin-left":- Width/2});
-            
-            })
-            
+
             self.children("img").eq(0).show();
             self.children("img").eq(1).hide();
 	    	self.removeClass("rotateZ");
             flag = true;
 	    },2000);
-
-    	$("#img-detail").find(".btn-sure button").click(function(){
-            
-            var text1 = '',
-                text2 = '',
-                text = ' ',
-                qurl = URLSafeBase64Encode('http://nianwei.qiniu.io'),
-                img = '/image/'+URLSafeBase64Encode(srcShow)+'/dissolve/100/gravity/NorthWest/dx/50/dy/55',
-                bgurl = "http://7u2q8u.com1.z0.glb.clouddn.com/baidi03.png",                
-                url = bgurl+'?watermark/3',
-                val = $("#img-detail").find(".introduce textarea").val();
-               
-                if($("#area").children("img").attr("src")){                    
-                   img = img +'/image/'+URLSafeBase64Encode($("#area").children("img").attr("src")+'?imageView2/1/w/120')+'/dissolve/100/gravity/NorthWest/dx/5/dy/5';
-                }
-                if($("#data").children("img").attr("src")){
-                   img = img + '/image/'+URLSafeBase64Encode($("#data").children("img").attr("src"))+'/dissolve/100/gravity/SouthWest/dx/50/dy/105';
-                }
-                if($("#flavor").children("img").attr("src")){
-                   img = img + '/image/'+URLSafeBase64Encode($("#flavor").children("img").attr("src")+'?imageView2/1/w/45/h/70')+'/dissolve/100/gravity/SouthEast/dx/30/dy/120';
-                }
-                
-                if(!val){
-                    val = $("#img-detail").find(".introduce textarea").attr("placeholder");
-                } 
-      
-                text1 = URLSafeBase64Encode(val.substr(0,21));
-                 
-               if(val.length > 21){
-                    text =  val.substr(21,30);
-                }
-                text2 = URLSafeBase64Encode(text);   
-
-            if(val.length>30){
-                $("#img-detail").find(".introduce .error").show();
-            }
-            else{
-
-                
-                $("#img-detail").hide();
-                $("#img-detail").find(".icon").hide();
-                $("#img-share").find(".image-show img").hide().attr("src",url+img+'/text/'+text1+'/font/'+URLSafeBase64Encode('楷体')+'/fontsize/300/dissolve/100/gravity/SouthWest/dx/50/dy/68'+'/text/'+text2+'/font/'+URLSafeBase64Encode('楷体')+'/fontsize/300/dissolve/100/gravity/SouthWest/dx/50/dy/47'+'/text/'+qurl+'/font/'+URLSafeBase64Encode('楷体')+'/fill/'+URLSafeBase64Encode('#cccccc')+'/fontsize/280/dissolve/100/gravity/SouthEast/dx/50/dy/13');
-                 $("#img-share").show();
-                $("#img-share").find(".image-show p").css("height",$(".container").height() * 0.8);
-
-
-                var SHARE_TEXT = '＃我的年味日记＃除夕之夜，火车赶回家，爸妈在等我吃年夜饭，这就是我的年味儿，不论再晚，有人等你。2015.2.15-3.1七牛邀你玩转［我的年味日记］nianwei.qiniu.io，寻找年味儿。转发本微博便可抽取IPad以及全套年味日记春节贺卡（20套）。', 
-                mainUrl =  $("#img-share").find(".image-show img").attr("src");
-
-                $("#img-share").find(".image-share a").eq(1).attr("href",genWeiboShareLink(SHARE_TEXT, mainUrl));
-            }
-            
-        });  
- 
-        $("#img-detail").find(".label-year button").click(function(){
-
-            var self = $(this),
-                marginTop  = '',
-                right = '';
-
-            $("#img-detail").find(".icon").hide();
-
-            $("#bg-color").width($(".container").width());
-            $("#bg-color").height($(window).height());
-            $("#bg-color").show();
-            self.siblings().css("z-index","19");
-            self.css("z-index","21");
-
-            $("#img-detail").find(".image-show .year-img").css("visibility","hidden");
-            $("#img-detail").find(".detail-label").hide();
-            $("#img-detail").find(".detail-label").eq(self.index()).show();
-            
-            marginTop = $("#img-detail").find(".image-show").height() - $("#img-detail").find(".detail-label").eq(self.index()).children("table").height();
-            right =$("#img-detail").find(".image-show").width() - $("#img-detail").find(".detail-label").eq(self.index()).children("table").width();
-
-            $("#img-detail").find(".detail-label").eq(self.index()).children("table").css("margin-top",marginTop / 2);
-            
-            $("#img-detail").find("b").show();
-            $("#img-detail").find("b").css({"top":(marginTop - 70) / 2, "right": (right - 25) / 2});
-
-            $("#img-detail").find(".detail-label").eq(self.index()).find("table td").click(function(){
-                 
-                //$("#img-detail").find(".icon").show();
-                var dataFor = $(this).parents(".detail-label").data("for");
-                
-                $("#bg-color").hide();
-                imgData = 'http://7u2q8u.com1.z0.glb.clouddn.com/' + $(this).data("for") + '.png';
-
-               
-                $(this).parents(".image-show").children(".detail-label").hide();
-                $(this).parents(".detail-label").siblings("b").hide();
-                 
-                $("#img-detail").find(".image-show .year-img").css("visibility","visible");
-    
-                
-                $("#"+dataFor).children('img').attr("src",imgData);
-
-                $("#"+dataFor).show();
-                if(dataFor == 'data'){
-                    $("#img-detail .data-bg").css({"left":Top / 2,"bottom":Top / 8});
-                }
-                if(dataFor == 'flavor'){
-                    $("#img-detail .flavor-bg").css({"right":Top / 4,"bottom":Top / 4});
-                }
-
-                for(var i = 0; i<3; i++){
-                    if( $("#img-detail .icon").eq(i).children("img").attr("src")){
-                        $("#img-detail .icon").eq(i).show();
-                        $("#img-detail .icon").eq(i).click(function(){
-                            $(this).children().attr("src","");
-                            $(this).hide();
-                            //console.log($(this))
-                        })
-                    }
-                }
-                
-               
-                
-                
-            });
-
-            $("#img-detail .image-show").click(function(e){
-                $("#bg-color").hide();
-                $("#img-detail").find(".detail-label").hide();
-                $("#img-detail").find("b").hide();
-                $("#img-detail").find(".image-show .year-img").css("visibility","visible");
-
-                for(var i = 0; i<3; i++){
-                    if( $("#img-detail .icon").eq(i).children("img").attr("src")){
-                        $("#img-detail .icon").eq(i).show();
-                    }
-                }
-                
-            });
-
-            
-            $("#bg-color").click(function(e){
-                $("#bg-color").hide();
-                $("#img-detail").find(".detail-label").hide();
-                $("#img-detail").find("b").hide();
-                $("#img-detail").find(".image-show .year-img").css("visibility","visible");
-
-                for(var i = 0; i<3; i++){
-                    if( $("#img-detail .icon").eq(i).children("img").attr("src")){
-                        $("#img-detail .icon").eq(i).show();
-                    }
-                }
-                    
-            });
-
-            $("#img-detail").find("b").click(function(){
-
-                $(this).hide();
-                $(this).siblings(".detail-label").hide();
-                for(var i = 0; i<2; i++){
-                    if( $("#img-detail .icon").eq(i).children("img").attr("src")){
-                        $("#img-detail .icon").eq(i).show();
-                    }
-                }
-                
-               
-            }); 
-
-
-              
-        });
     	
     });
+    
+    $("#img-detail").find(".label-year button").click(function(){
+
+        var self = $(this),
+            marginTop  = '';
+
+        $("#img-detail").find(".icon").hide();
+
+        $("#bg-color").width($(".container").width());
+        $("#bg-color").height($(window).height());
+        $("#bg-color").show();
+        self.siblings().css("z-index","19");
+        self.css("z-index","21");
+
+        $("#img-detail").find(".image-show .year-img").css("visibility","hidden");
+        $("#img-detail").find(".detail-label").hide();
+        $("#img-detail").find(".detail-label").eq(self.index()).show();
+        
+        marginTop = $("#img-detail").find(".image-show").height() - $("#img-detail").find(".detail-label").eq(self.index()).children("table").height();
+        
+        $("#img-detail").find(".detail-label").eq(self.index()).children("table").css("margin-top",marginTop / 2);
+        
+        $("#img-detail").find("b").show();
+        $("#img-detail").find("b").css("top",(marginTop - 70) / 2);
+          
+    });
+
+    $("#img-detail .detail-label").find("table td").click(function(){
+                 
+                //$("#img-detail").find(".icon").show();
+        var dataFor = $(this).parents(".detail-label").data("for");
+        
+        $("#bg-color").hide();
+        imgData = 'http://7u2q8u.com1.z0.glb.clouddn.com/' + $(this).data("for") + '.png';
 
        
+        $(this).parents(".image-show").children(".detail-label").hide();
+        $(this).parents(".detail-label").siblings("b").hide();
+         
+        $("#img-detail").find(".image-show .year-img").css("visibility","visible");
 
+        
+        $("#"+dataFor).children('img').attr("src",imgData);
+
+        $("#"+dataFor).show();
+
+        for(var i = 0; i<3; i++){
+            if( $("#img-detail .icon").eq(i).children("img").attr("src")){
+                $("#img-detail .icon").eq(i).show();
+                $("#img-detail .icon").eq(i).click(function(){
+                    $(this).children().attr("src","");
+                    $(this).hide();
+                    
+                })
+            }
+        }  
+    });
+
+    $("#img-detail .image-show").click(function(){
+        $("#bg-color").hide();
+        $("#img-detail").find(".detail-label").hide();
+        $("#img-detail").find("b").hide();
+        $("#img-detail").find(".image-show .year-img").css("visibility","visible");
+
+        for(var i = 0; i<3; i++){
+            if( $("#img-detail .icon").eq(i).children("img").attr("src")){
+                $("#img-detail .icon").eq(i).show();
+            }
+        }
+        
+    });
+
+    
+    $("#bg-color").click(function(){
+        $("#bg-color").hide();
+        $("#img-detail").find(".detail-label").hide();
+        $("#img-detail").find("b").hide();
+        $("#img-detail").find(".image-show .year-img").css("visibility","visible");
+
+        for(var i = 0; i<3; i++){
+            if( $("#img-detail .icon").eq(i).children("img").attr("src")){
+                $("#img-detail .icon").eq(i).show();
+            }
+        }
+            
+    });
+
+    $("#img-detail").find("b").click(function(){
+
+        $(this).hide();
+        $(this).siblings(".detail-label").hide();
+        for(var i = 0; i<2; i++){
+            if( $("#img-detail .icon").eq(i).children("img").attr("src")){
+                $("#img-detail .icon").eq(i).show();
+            }
+        }
+        
+       
+    }); 
+
+       
+    $("#img-detail").find(".btn-sure button").click(function(){
+            
+        var text1 = '',
+            text2 = '',
+            text = ' ',
+            
+            qurl = URLSafeBase64Encode('http://nianwei.qiniu.io'),
+            img = '/image/'+URLSafeBase64Encode(srcShow)+'/dissolve/100/gravity/NorthWest/dx/50/dy/55',
+            bgurl = "http://7u2q8u.com1.z0.glb.clouddn.com/baidi03.png",                
+            url = bgurl+'?watermark/3',
+            val = $("#img-detail").find(".introduce textarea").val();
+           
+        if($("#area").children("img").attr("src")){                    
+           img = img +'/image/'+URLSafeBase64Encode($("#area").children("img").attr("src")+'?imageView2/1/w/120')+'/dissolve/100/gravity/NorthWest/dx/5/dy/5';
+        }
+        if($("#data").children("img").attr("src")){
+           img = img + '/image/'+URLSafeBase64Encode($("#data").children("img").attr("src"))+'/dissolve/100/gravity/SouthWest/dx/50/dy/105';
+        }
+        if($("#flavor").children("img").attr("src")){
+           img = img + '/image/'+URLSafeBase64Encode($("#flavor").children("img").attr("src")+'?imageView2/1/w/45/h/70')+'/dissolve/100/gravity/SouthEast/dx/30/dy/120';
+        }
+        
+        if(!val){
+            val = $("#img-detail").find(".introduce textarea").attr("placeholder");
+        } 
+
+        text1 = URLSafeBase64Encode(val.substr(0,21));
+         
+       if(val.length > 21){
+            text =  val.substr(21,40);
+        }
+        text2 = URLSafeBase64Encode(text);   
+
+        if(val.length>40){
+            $("#img-detail").find(".introduce .error").show();
+        }
+        else{
+            $("#img-detail").hide();
+            $("#img-detail").find(".icon").hide();
+            $("#img-share").find(".image-show img").hide().attr("src",url+img+'/text/'+text1+'/font/'+URLSafeBase64Encode('楷体')+'/fontsize/300/dissolve/100/gravity/SouthWest/dx/50/dy/68'+'/text/'+text2+'/font/'+URLSafeBase64Encode('楷体')+'/fontsize/300/dissolve/100/gravity/SouthWest/dx/50/dy/47'+'/text/'+qurl+'/font/'+URLSafeBase64Encode('楷体')+'/fill/'+URLSafeBase64Encode('#cccccc')+'/fontsize/280/dissolve/100/gravity/SouthEast/dx/50/dy/13');
+             $("#img-share").show();
+            $("#img-share").find(".image-show p").css("height",$(".container").height() * 0.8);
+
+
+            var SHARE_TEXT = '＃我的年味日记＃除夕之夜，火车赶回家，爸妈在等我吃年夜饭，这就是我的年味儿，不论再晚，有人等你。2015.2.15-3.2七牛邀你玩转［我的年味日记］http://nianwei.qiniu.io，寻找年味儿。转发本微博便可抽取IPad和全套年味日记春节贺卡（30套）。', 
+                mainUrl =  $("#img-share").find(".image-show img").attr("src");
+
+            $("#img-share").find(".image-share a").eq(1).attr("href",genWeiboShareLink(SHARE_TEXT, mainUrl));
+        }
+        
+    }); 
+
+    
 
     $("#img-share").find(".image-show img").load(function(){
         $("#img-share").find(".image-show p").hide();
         $("#img-share").find(".image-show img").show();
     });
    
-
-	
-
 	$("#img-share").find("#retry").click(function(){
         
         $("#img-share").find(".image-show img").attr("src","");
@@ -298,22 +264,17 @@ $(document).ready(function(){
          $("#data").children("img").attr("src","");
         $("#flavor").children("img").attr("src","");
 
-        // $("#img-share").find(".image-show img").attr("src","http://7u2q8u.com1.z0.glb.clouddn.com/baidi03.png")
 
 	});
-
-        
- 
-    
+   
 })
-
 
 
 var genWeiboShareLink = function(text, templUrl) {
     var ShareText = encodeURIComponent(text);
     var picUrl = encodeURIComponent(templUrl);
     var url = encodeURIComponent('http://ninwei.qiniu.io');
-    return 'http://service.weibo.com/share/share.php?url=' + url + '&type=button&ralateUid=2651079901&language=zh_cn&appkey=3084908017&title=' + ShareText + '&pic=' + picUrl + '&searchPic=false&style=simple';
+    return 'http://service.weibo.com/share/share.php?&type=button&ralateUid=2651079901&language=zh_cn&appkey=3084908017&title=' + ShareText + '&pic=' + picUrl + '&searchPic=false&style=simple';
 };
 
 var utf8_encode = function(argString) {

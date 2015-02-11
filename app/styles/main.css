@@ -134,35 +134,14 @@ body .container .table-auto button {
   padding: 5% 0;
   color: #000;
 }
-#year-home .introduce {
-  font-size: 18px;
-  text-align: left;
-}
-#year-home .introduce h4 {
-  font-size: 1.15em;
-  margin: 0 0 2% 8%;
-}
-#year-home .introduce i {
-  width: 7px;
-  height: 7px;
-  background: #000;
-  border-radius: 50%;
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 5px;
-}
-#year-home .introduce p {
-  /* margin-left: 5%; */
-  font-size: 1em;
-  margin: 0 0 2% 8%;
-}
-#year-home .introduce div {
+#year-home .image-show ul .tips {
+  width: 92%;
+  height: 13px;
+  position: absolute;
+  font-size: 13px;
+  color: #ccc;
   text-align: right;
-  padding-right: 9%;
-  margin-top: -7%;
-}
-#year-home .introduce div img {
-  width: 30%;
+  bottom: 5%;
 }
 #img-detail {
   display: none;
@@ -182,16 +161,19 @@ body .container .table-auto button {
   z-index: 21;
 }
 #img-detail .image-show .year-img {
+  width: 80%;
   height: 100%;
   background: #fff;
-  position: absolute;
-  left: 50%;
+  position: relative;
+  /* left: 50%; */
+  margin: 0 auto;
+  padding: 8% 0 12%;
   /* width: 50%;
 	        max-width: 280px; */
   /* margin: 3% auto; */
 }
 #img-detail .image-show .year-img img {
-  height: 80%;
+  height: 100%;
 }
 #img-detail .image-show .icon {
   display: none;
@@ -207,9 +189,17 @@ body .container .table-auto button {
   left: 0;
   top: 0;
 }
+#img-detail .image-show .flavor-bg {
+  bottom: 3%;
+  right: 10%;
+}
 #img-detail .image-show .flavor-bg img {
   width: 35px;
   height: 60px;
+}
+#img-detail .image-show .data-bg {
+  bottom: 3%;
+  left: 15%;
 }
 #img-detail .image-show .data-bg img {
   width: 57px;
@@ -241,11 +231,6 @@ body .container .table-auto button {
   border-right: 1px solid #666;
   border-top: 1px solid #666;
   text-align: center;
-  /* &:hover{
-							background: #f00;
-							border-radius: 50%;
-							
-						} */
 }
 #img-detail .image-show b {
   display: none;
@@ -257,7 +242,7 @@ body .container .table-auto button {
   font-size: 35px;
   border-radius: 50%;
   position: absolute;
-  right: 3%;
+  right: 4%;
   z-index: 21;
   overflow: hidden;
   border: 3px solid #fff;
@@ -281,12 +266,20 @@ body .container .table-auto button {
   margin: 5% auto;
   /* padding-top: 5%; */
   text-align: center;
+  position: relative;
 }
 #img-detail .introduce .text-infor .label-year {
   width: 100%;
   margin: 4% 0;
   text-align: center;
   position: relative;
+}
+#img-detail .introduce .text-infor .water {
+  font-size: 13px;
+  color: #ccc;
+  position: absolute;
+  top: -2%;
+  right: 0;
 }
 #img-detail .introduce .text-infor h4 {
   font-size: 1.1em;
@@ -316,6 +309,7 @@ body .container .table-auto button {
 #img-detail .introduce .text-infor .error {
   color: #f00;
   font-size: 12px;
+  position: absolute;
   display: none;
 }
 #img-detail .introduce .btn-sure {
@@ -340,7 +334,7 @@ body .container .table-auto button {
   display: none;
 }
 #img-share .image-show {
-  width: 100%;
+  width: 98%;
   margin: 0 auto;
 }
 #img-share .image-show p {
@@ -368,10 +362,13 @@ body .container .table-auto button {
   display: block;
   text-decoration: none;
   font-size: .9em;
-  margin-top: 3.5%;
   cursor: pointer;
   color: #01C6E0;
   font-weight: 700;
+  position: absolute;
+  bottom: 2%;
+  left: 50%;
+  margin-left: -28px;
 }
 #img-share .image-share img {
   width: 32px;
@@ -481,9 +478,12 @@ body .container .table-auto button {
   box-shadow: none;
   text-align: center;
   color: #fff;
-  font-size: 1.3em;
-  margin-top: 45%;
-  line-height: 30px;
+  font-size: 1.1em;
+  margin-top: 30%;
+  line-height: 23px;
+  word-break: break-all;
+  text-align: left;
+  padding: 0 5%;
 }
 @media screen and (min-width: 768px) {
   body {
@@ -491,7 +491,6 @@ body .container .table-auto button {
   }
   #year-home .image-show {
     width: 100%;
-    margin: 6% auto 8%;
     /* height: 50%; */
   }
   #year-home .image-show ul {
@@ -508,19 +507,6 @@ body .container .table-auto button {
 					max-height: 150px; */
     padding: 0;
   }
-  #year-home .introduce h4 {
-    font-size: 1.25em;
-    margin: 0 0 1% 10%;
-    margin-bottom: 1.2%;
-  }
-  #year-home .introduce p {
-    font-size: 1.15em;
-    margin-left: 10%;
-    margin-bottom: 1.2%;
-  }
-  #year-home .introduce div {
-    padding-right: 11%;
-  }
   #img-detail .introduce .text-infor {
     margin: 5% auto;
   }
@@ -530,9 +516,6 @@ body .container .table-auto button {
   }
   #img-detail .introduce .text-infor .label-year {
     margin: 3% auto;
-  }
-  #img-detail .image-show b {
-    right: 5%;
   }
   #img-share .share-btn button {
     font-size: 1.2em;
