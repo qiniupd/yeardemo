@@ -2,11 +2,28 @@ var Q = window.Q || {};
 Q.wHeight = $(window).height();
 Q.wWidth = Q.wHeight * 640 / 1136;
 
+Q.text = function(str, font, size, color,direction, dx, dy) {
+    var t = URLSafeBase64Encode(str),
+        f = URLSafeBase64Encode(font),
+        c = URLSafeBase64Encode(color);
+
+    return '/text/'+t+'/font/'+f+'/fontsize/'+size+'/gravity/'+direction+'/dx/'+dx+'/dy/'+dy;
+};
+
+Q.img = function(url, direction, dx, dy) {
+    var u = URLSafeBase64Encode(url);
+
+    return '/image/'+u+'/gravity/'+direction+'/dx/'+dx+'/dy/'+dy;
+};
+Q.small = function(url, w, h) {
+    return url+'?imageView2/1'+'/w/'+w+'/h/'+h;
+};
 
 $(document).ready(function(){
    
     var bgWid = bgWid =  Q.wWidth/6.4,
-        srcShow = $("#year-home").find("li div").children("img").eq(1).attr("src"),
+        srcShow = '',
+        index = '',
         flag = true,
         imgData = '';
        
@@ -57,7 +74,8 @@ $(document).ready(function(){
     	var marginLeft = '',
     	    self = $(this),
             inputValue = self.children("input").val();
-    	
+    	srcShow = $(this).children("img").eq(1).attr("src");
+        index = $(this).parent().index();
         if(flag){
             flag = false;
             self.addClass("rotateZ");
@@ -92,7 +110,7 @@ $(document).ready(function(){
         var self = $(this),
             marginTop  = '';
 
-        $("#img-detail").find(".icon").hide();
+        /*$("#img-detail").find(".icon").hide();*/
 
         $("#bg-color").width($(".container").width());
         $("#bg-color").height($(window).height());
@@ -116,12 +134,13 @@ $(document).ready(function(){
     $("#img-detail .detail-label").find("table td").click(function(){
                  
                 //$("#img-detail").find(".icon").show();
-        var dataFor = $(this).parents(".detail-label").data("for");
+        var dataFor = $(this).parents(".detail-label").data("for"),
+            imgData = 'http://7u2q8u.com1.z0.glb.clouddn.com/' + $(this).data("for") + '.png';
         
         $("#bg-color").hide();
-        imgData = 'http://7u2q8u.com1.z0.glb.clouddn.com/' + $(this).data("for") + '.png';
 
-       
+
+
         $(this).parents(".image-show").children(".detail-label").hide();
         $(this).parents(".detail-label").siblings("b").hide();
          
@@ -131,30 +150,27 @@ $(document).ready(function(){
         $("#"+dataFor).children('img').attr("src",imgData);
 
         $("#"+dataFor).show();
-
-        for(var i = 0; i<3; i++){
-            if( $("#img-detail .icon").eq(i).children("img").attr("src")){
-                $("#img-detail .icon").eq(i).show();
-                $("#img-detail .icon").eq(i).click(function(){
-                    $(this).children().attr("src","");
-                    $(this).hide();
-                    
-                })
-            }
-        }  
+        
     });
 
+    var daluft = ['http://7u2q8u.com1.z0.glb.clouddn.com/hu.png','http://7u2q8u.com1.z0.glb.clouddn.com/sanshi.png','http://7u2q8u.com1.z0.glb.clouddn.com/xingfu.png'];
+       
+        $("#img-detail").find(".icon").click(function(){
+            $(this).children().attr("src",daluft[$(this).index()]);
+            $(this).hide();
+    })
+           
     $("#img-detail .image-show").click(function(){
         $("#bg-color").hide();
         $("#img-detail").find(".detail-label").hide();
         $("#img-detail").find("b").hide();
         $("#img-detail").find(".image-show .year-img").css("visibility","visible");
 
-        for(var i = 0; i<3; i++){
-            if( $("#img-detail .icon").eq(i).children("img").attr("src")){
+       /* for(var i = 0; i<3; i++){
+            if( $("#img-detail .icon").eq(i).css("display","block")){
                 $("#img-detail .icon").eq(i).show();
             }
-        }
+        }*/
         
     });
 
@@ -165,11 +181,11 @@ $(document).ready(function(){
         $("#img-detail").find("b").hide();
         $("#img-detail").find(".image-show .year-img").css("visibility","visible");
 
-        for(var i = 0; i<3; i++){
+        /*for(var i = 0; i<3; i++){
             if( $("#img-detail .icon").eq(i).children("img").attr("src")){
                 $("#img-detail .icon").eq(i).show();
             }
-        }
+        }*/
             
     });
 
@@ -177,11 +193,11 @@ $(document).ready(function(){
 
         $(this).hide();
         $(this).siblings(".detail-label").hide();
-        for(var i = 0; i<2; i++){
+        /*for(var i = 0; i<2; i++){
             if( $("#img-detail .icon").eq(i).children("img").attr("src")){
                 $("#img-detail .icon").eq(i).show();
             }
-        }
+        }*/
         
        
     }); 
@@ -189,50 +205,48 @@ $(document).ready(function(){
        
     $("#img-detail").find(".btn-sure button").click(function(){
             
-        var text1 = '',
-            text2 = '',
-            text = ' ',
-            
-            qurl = URLSafeBase64Encode('http://nianwei.qiniu.io'),
-            img = '/image/'+URLSafeBase64Encode(srcShow)+'/dissolve/100/gravity/NorthWest/dx/50/dy/55',
-            bgurl = "http://7u2q8u.com1.z0.glb.clouddn.com/baidi03.png",                
-            url = bgurl+'?watermark/3',
+        var text = ' ',            
+            qurl = 'http://nianwei.qiniu.io',
+            img = '',
+            bgurl = "http://7u2q8u.com1.z0.glb.clouddn.com/baidi03.png?watermark/3",                
+            url = '',
             val = $("#img-detail").find(".introduce textarea").val();
-           
-        if($("#area").children("img").attr("src")){                    
-           img = img +'/image/'+URLSafeBase64Encode($("#area").children("img").attr("src")+'?imageView2/1/w/120')+'/dissolve/100/gravity/NorthWest/dx/5/dy/5';
-        }
-        if($("#data").children("img").attr("src")){
-           img = img + '/image/'+URLSafeBase64Encode($("#data").children("img").attr("src"))+'/dissolve/100/gravity/SouthWest/dx/50/dy/105';
-        }
-        if($("#flavor").children("img").attr("src")){
-           img = img + '/image/'+URLSafeBase64Encode($("#flavor").children("img").attr("src")+'?imageView2/1/w/45/h/70')+'/dissolve/100/gravity/SouthEast/dx/30/dy/120';
-        }
-        
+
         if(!val){
             val = $("#img-detail").find(".introduce textarea").attr("placeholder");
         } 
-
-        text1 = URLSafeBase64Encode(val.substr(0,21));
          
-       if(val.length > 21){
+        if(val.length > 21){
             text =  val.substr(21,40);
-        }
-        text2 = URLSafeBase64Encode(text);   
+        } 
 
+        img = Q.img(srcShow,'NorthWest', 50, 55) +Q.img(Q.small($("#area").children("img").attr("src"),120,120),'NorthWest', 5, 5) +Q.img($("#data").children("img").attr("src"),'SouthWest', 50, 105)+Q.img(Q.small($("#flavor").children("img").attr("src"),45,70),'SouthEast', 30, 120);
+        url = bgurl+img+Q.text(val.substr(0,21), '楷体', 300, 'black','SouthWest', 50, 68)+Q.text(text, '楷体', 300, 'black','SouthWest', 50, 47)+Q.text(qurl, '楷体', 280, '#cccccc','SouthEast', 50, 13);  
+        
         if(val.length>40){
             $("#img-detail").find(".introduce .error").show();
         }
         else{
+           
+            $("#img-share").find(".image-show img").hide().attr("src",url);
             $("#img-detail").hide();
             $("#img-detail").find(".icon").hide();
-            $("#img-share").find(".image-show img").hide().attr("src",url+img+'/text/'+text1+'/font/'+URLSafeBase64Encode('楷体')+'/fontsize/300/dissolve/100/gravity/SouthWest/dx/50/dy/68'+'/text/'+text2+'/font/'+URLSafeBase64Encode('楷体')+'/fontsize/300/dissolve/100/gravity/SouthWest/dx/50/dy/47'+'/text/'+qurl+'/font/'+URLSafeBase64Encode('楷体')+'/fill/'+URLSafeBase64Encode('#cccccc')+'/fontsize/280/dissolve/100/gravity/SouthEast/dx/50/dy/13');
-             $("#img-share").show();
+            $("#img-share").show();
             $("#img-share").find(".image-show p").css("height",$(".container").height() * 0.8);
 
 
-            var SHARE_TEXT = '＃我的年味日记＃除夕之夜，火车赶回家，爸妈在等我吃年夜饭，这就是我的年味儿，不论再晚，有人等你。2015.2.15-3.2七牛邀你玩转［我的年味日记］http://nianwei.qiniu.io，寻找年味儿。转发本微博便可抽取IPad和全套年味日记春节贺卡（30套）。', 
-                mainUrl =  $("#img-share").find(".image-show img").attr("src");
+            var TEXT = [
+            '＃我的年味日记＃年初五，迎财神，谁家的鞭炮最响，财神爷就会到谁家。2015.2.15～3.2七牛邀你玩转［我的年味日记］http://nianwei.qiniu.io，寻找年味儿。转发本微博可抽取IPad和全套年味日记春节贺卡（20套）。',
+            '＃我的年味日记＃小时候最惦记的是，大年初一，穿上新衣服，美美的。2015.2.15～3.2七牛邀你玩转［我的年味日记］http://nianwei.qiniu.io，寻找年味儿。转发本微博可抽取IPad和全套年味日记春节贺卡（20套）。',
+            '＃我的年味日记＃小时候过年，妈妈把饺子摆成圆形，说象征一家人团团圆圆。2015.2.15～3.2七牛邀你玩转［我的年味日记］http://nianwei.qiniu.io，寻找年味儿。转发本微博可抽取IPad和全套年味日记春节贺卡（20套）。',
+            '＃我的年味日记＃小时候拜年串门，叔叔阿姨都说我嘴甜，然后塞给我一个大红包。2015.2.15～3.2七牛邀你玩转［我的年味日记］http://nianwei.qiniu.io，寻找年味儿。转发本微博可抽取IPad和全套年味日记春节贺卡（20套）。',
+            '＃我的年味日记＃除夕之夜，火车赶回家，爸妈在等我吃年夜饭，这就是我的年味儿，不论再晚，有人等你。2015.2.15～3.2七牛邀你玩转［我的年味日记］http://nianwei.qiniu.io，寻找年味儿。转发本微博可抽取IPad和全套年味日记春节贺卡（20套）。',
+            '＃我的年味日记＃剪纸窗花，大红色，有十二生肖，有福，一个个栩栩如生。2015.2.15～3.2七牛邀你玩转［我的年味日记］http://nianwei.qiniu.io，寻找年味儿。转发本微博可抽取IPad和全套年味日记春节贺卡（20套）。',
+            '＃我的年味日记＃逛庙会，看舞龙舞狮，锣鼓声天，过年就是这么热闹。2015.2.15～3.2七牛邀你玩转［我的年味日记］http://nianwei.qiniu.io，寻找年味儿。转发本微博可抽取IPad和全套年味日记春节贺卡（20套）。',
+            '＃我的年味日记＃小时候过年，爸爸贴春联，我帮他拿浆糊。上联下联，承载着美好。2015.2.15～3.2七牛邀你玩转［我的年味日记］http://nianwei.qiniu.io，寻找年味儿。转发本微博可抽取IPad和全套年味日记春节贺卡（20套）。',
+            '＃我的年味日记＃老妈，过去长辈给我的压岁钱你说先帮我收着，现在，可以还我么？2015.2.15～3.2七牛邀你玩转［我的年味日记］http://nianwei.qiniu.io，寻找年味儿。转发本微博可抽取IPad和全套年味日记春节贺卡（20套）。'], 
+                mainUrl =  $("#img-share").find(".image-show img").attr("src"),
+                SHARE_TEXT = TEXT[index];
 
             $("#img-share").find(".image-share a").eq(1).attr("href",genWeiboShareLink(SHARE_TEXT, mainUrl));
         }
@@ -260,9 +274,9 @@ $(document).ready(function(){
 		
 		$("#year-home").show();
 
-        $("#area").children("img").attr("src","");
-         $("#data").children("img").attr("src","");
-        $("#flavor").children("img").attr("src","");
+        $("#area").children("img").attr("src","http://7u2q8u.com1.z0.glb.clouddn.com/hu.png");
+        $("#data").children("img").attr("src","http://7u2q8u.com1.z0.glb.clouddn.com/sanshi.png");
+        $("#flavor").children("img").attr("src","http://7u2q8u.com1.z0.glb.clouddn.com/xingfu.png");
 
 
 	});
