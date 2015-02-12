@@ -1,13 +1,12 @@
 var Q = window.Q || {};
 Q.wHeight = $(window).height();
-Q.wWidth = Q.wHeight * 640 / 1136;
-
+Q.wWidth = Q.wHeight * 637 / 1134;
 Q.text = function(str, font, size, color,direction, dx, dy) {
     var t = URLSafeBase64Encode(str),
         f = URLSafeBase64Encode(font),
         c = URLSafeBase64Encode(color);
 
-    return '/text/'+t+'/font/'+f+'/fontsize/'+size+'/gravity/'+direction+'/dx/'+dx+'/dy/'+dy;
+    return '/text/'+t+'/font/'+f+'/fontsize/'+size+'/fill/'+c+'/gravity/'+direction+'/dx/'+dx+'/dy/'+dy;
 };
 
 Q.img = function(url, direction, dx, dy) {
@@ -21,7 +20,7 @@ Q.small = function(url, w, h) {
 
 $(document).ready(function(){
    
-    var bgWid = bgWid =  Q.wWidth/6.4,
+    var bgWid = Q.wHeight/11.34,
         srcShow = '',
         index = '',
         flag = true,
@@ -29,9 +28,8 @@ $(document).ready(function(){
        
     $("#year-index").find("img").width(Q.wWidth);
     $(".container").width(Q.wWidth);
-    $(".container").height($(window).height());    
+    $("body").height($(window).height());    
     $("body").css('background-size',bgWid);
-
     var mySwiper = new Swiper('.swiper-container', {
         pagination: '.pagination',
         paginationClickable: true
@@ -236,15 +234,15 @@ $(document).ready(function(){
 
 
             var TEXT = [
-            '＃我的年味日记＃年初五，迎财神，谁家的鞭炮最响，财神爷就会到谁家。2015.2.15～3.2七牛邀你玩转［我的年味日记］http://nianwei.qiniu.io，寻找年味儿。转发本微博可抽取IPad和全套年味日记春节贺卡（20套）。',
-            '＃我的年味日记＃小时候最惦记的是，大年初一，穿上新衣服，美美的。2015.2.15～3.2七牛邀你玩转［我的年味日记］http://nianwei.qiniu.io，寻找年味儿。转发本微博可抽取IPad和全套年味日记春节贺卡（20套）。',
-            '＃我的年味日记＃小时候过年，妈妈把饺子摆成圆形，说象征一家人团团圆圆。2015.2.15～3.2七牛邀你玩转［我的年味日记］http://nianwei.qiniu.io，寻找年味儿。转发本微博可抽取IPad和全套年味日记春节贺卡（20套）。',
-            '＃我的年味日记＃小时候拜年串门，叔叔阿姨都说我嘴甜，然后塞给我一个大红包。2015.2.15～3.2七牛邀你玩转［我的年味日记］http://nianwei.qiniu.io，寻找年味儿。转发本微博可抽取IPad和全套年味日记春节贺卡（20套）。',
-            '＃我的年味日记＃除夕之夜，火车赶回家，爸妈在等我吃年夜饭，这就是我的年味儿，不论再晚，有人等你。2015.2.15～3.2七牛邀你玩转［我的年味日记］http://nianwei.qiniu.io，寻找年味儿。转发本微博可抽取IPad和全套年味日记春节贺卡（20套）。',
-            '＃我的年味日记＃剪纸窗花，大红色，有十二生肖，有福，一个个栩栩如生。2015.2.15～3.2七牛邀你玩转［我的年味日记］http://nianwei.qiniu.io，寻找年味儿。转发本微博可抽取IPad和全套年味日记春节贺卡（20套）。',
-            '＃我的年味日记＃逛庙会，看舞龙舞狮，锣鼓声天，过年就是这么热闹。2015.2.15～3.2七牛邀你玩转［我的年味日记］http://nianwei.qiniu.io，寻找年味儿。转发本微博可抽取IPad和全套年味日记春节贺卡（20套）。',
-            '＃我的年味日记＃小时候过年，爸爸贴春联，我帮他拿浆糊。上联下联，承载着美好。2015.2.15～3.2七牛邀你玩转［我的年味日记］http://nianwei.qiniu.io，寻找年味儿。转发本微博可抽取IPad和全套年味日记春节贺卡（20套）。',
-            '＃我的年味日记＃老妈，过去长辈给我的压岁钱你说先帮我收着，现在，可以还我么？2015.2.15～3.2七牛邀你玩转［我的年味日记］http://nianwei.qiniu.io，寻找年味儿。转发本微博可抽取IPad和全套年味日记春节贺卡（20套）。'], 
+            '＃我的年味日记＃＃大年初五＃年初五，迎财神，谁家的鞭炮最响，财神爷就会到谁家。我在http://nianwei.qiniu.io 记录下了我的年味儿！你的年味是怎样呢？快来定制［我的年味日记］吧！参与活动还可抽取IPad和全套年味日记春节贺卡。',
+            '＃我的年味日记＃＃大年初一＃小时候最惦记的是，大年初一，穿上新衣服，美美的。我在http://nianwei.qiniu.io 记录下了我的年味儿！你的年味是怎样呢？快来定制［我的年味日记］吧！参与活动还可抽取IPad和全套年味日记春节贺卡。',
+            '＃我的年味日记＃＃大年三十＃小时候过年，妈妈把饺子摆成圆形，说象征一家人团团圆圆。我在http://nianwei.qiniu.io 记录下了我的年味儿！你的年味是怎样呢？快来定制［我的年味日记］吧！参与活动还可抽取IPad和全套年味日记春节贺卡。',
+            '＃我的年味日记＃＃大年初一＃小时候拜年串门，叔叔阿姨都说我嘴甜，然后塞给我一个大红包。我在http://nianwei.qiniu.io 记录下了我的年味儿！你的年味是怎样呢？快来定制［我的年味日记］吧！参与活动还可抽取IPad和全套年味日记春节贺卡。',
+            '＃我的年味日记＃＃大年三十＃无论相隔多远，工作多忙，我都要回家吃年夜饭，爸妈在等我。我在http://nianwei.qiniu.io 记录下了我的年味儿！你的年味是怎样呢？快来定制［我的年味日记］吧！参与活动还可抽取IPad和全套年味日记春节贺卡。',
+            '＃我的年味日记＃＃大年三十＃剪纸窗花，大红色，有十二生肖，有福，一个个栩栩如生。我在http://nianwei.qiniu.io 记录下了我的年味儿！你的年味是怎样呢？快来定制［我的年味日记］吧！参与活动还可抽取IPad和全套年味日记春节贺卡。',
+            '＃我的年味日记＃＃正月十五＃逛庙会，看舞龙舞狮，锣鼓声天，过年就是这么热闹。我在http://nianwei.qiniu.io 记录下了我的年味儿！你的年味是怎样呢？快来定制［我的年味日记］吧！参与活动还可抽取IPad和全套年味日记春节贺卡。',
+            '＃我的年味日记＃＃大年三十＃小时候过年，爸爸贴春联，我帮他拿浆糊。上联下联，承载着美好。我在http://nianwei.qiniu.io 记录下了我的年味儿！你的年味是怎样呢？快来定制［我的年味日记］吧！参与活动还可抽取IPad和全套年味日记春节贺卡。',
+            '＃我的年味日记＃＃大年三十＃老妈，过去长辈给我的压岁钱你说先帮我收着，现在，可以还我么？我在http://nianwei.qiniu.io 记录下了我的年味儿！你的年味是怎样呢？快来定制［我的年味日记］吧！参与活动还可抽取IPad和全套年味日记春节贺卡。'], 
                 mainUrl =  $("#img-share").find(".image-show img").attr("src"),
                 SHARE_TEXT = TEXT[index];
 
