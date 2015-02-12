@@ -284,19 +284,16 @@ body .container .table-auto button {
 #img-detail .introduce .btn-sure {
   text-align: center;
   padding-top: 0.5%;
-  position: relative;
 }
 #img-detail .introduce .btn-sure button {
   float: none;
 }
 #img-detail .introduce .btn-sure span {
-  font-size: .9em;
+  font-size: .8em;
   cursor: pointer;
   color: #01C6E0;
   font-weight: 700;
-  position: absolute;
-  bottom: -3px;
-  right: 10%;
+  vertical-align: bottom;
 }
 #img-detail .introduce button {
   color: #fff;
