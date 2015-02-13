@@ -25,11 +25,11 @@ $(document).ready(function(){
         index = '',
         flag = true,
         imgData = '';
-       
+    
     $("#year-index").find("img").width(Q.wWidth);
     $(".container").width(Q.wWidth);
     $("body").height($(window).height());    
-    $("body").css('background-size',bgWid);
+     $("body").css('background-size',bgWid);
     var mySwiper = new Swiper('.swiper-container', {
         pagination: '.pagination',
         paginationClickable: true
