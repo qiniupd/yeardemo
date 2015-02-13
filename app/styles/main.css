@@ -390,6 +390,9 @@ body .container .table-auto button {
   margin: 0 auto;
   padding: 0;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
 }
 .swiper-container .swiper-wrapper {
   position: relative;
@@ -437,6 +440,14 @@ body .container .table-auto button {
   word-break: break-all;
   text-align: left;
   padding: 0 5%;
+}
+.modal-content span {
+  color: #0598E0;
+  font-weight: 700;
+}
+.modal-content i {
+  color: #E50202;
+  font-size: 20px;
 }
 @media screen and (min-width: 768px) {
   body {
